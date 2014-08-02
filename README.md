@@ -1,4 +1,4 @@
-spawncamping-bears
+userscripts
 ==================
 
-Userscripts I made over the years, and used to be up on userscripts.org
+These are some userscripts I made over the years, some of which used to be up on userscripts.org
