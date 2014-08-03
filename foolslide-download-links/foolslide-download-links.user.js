@@ -3,7 +3,7 @@
 // @namespace   https://github.com/ToostInc/userscripts
 // @description Adds Download Links to Foolslide reader links on a (front) page
 // @include     http://akashiscans.com/
-// @copyright   2014, Toost Inc.
+// @copyright   2014, Joost Bremmer
 // @license     MIT
 // @version     2
 // @require     http://code.jquery.com/jquery-latest.min.js

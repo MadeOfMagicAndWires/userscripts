@@ -6,7 +6,7 @@
 // @include        http://www.mangastream.com/read/*
 // @include        http://www.readms.com/r/*
 // @include        http://readms.com/r/*
-// @copyright      2010+, Toost Inc.
+// @copyright      2010+, Joost Bremmer
 // @license        MIT
 // @version        1.6
 // @require        http://code.jquery.com/jquery-latest.min.js
