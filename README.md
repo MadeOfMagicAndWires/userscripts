@@ -7,19 +7,6 @@ some of which used to be up on userscripts.org
 Most of them help with downloading manga/comic chapters from online readers,
 as I prefer offline readers like [MComix](http://sourceforge.net/projects/mcomix/).
 
-<head>
-	<style>
-		.screenshots {
-        margin:auto;
-        text-align: center;
-
-		}
-
-        .screenshot img {
-        	max-width: 80%;
-        }
-	</style>
-</head>
 
 Index
 -----
@@ -41,7 +28,7 @@ Adds direct links to every image when reading a chapter on [Batoto](http://http:
 so that they may be easily downloaded.
 
 
-<div class="screenshots">
+<div class="screenshots" style="text-align: center; max-wdith: 80%">
 	<h5>Screenshots:</h5>
 	<img src="http://i.imgur.com/VXo2aAB.png" width="90%" alt="Navigation Menu" />
     <img src="http://i.imgur.com/Lz1oCWh.png" width="45%" alt="Batoto Direct Links" />
@@ -59,7 +46,7 @@ Adds Download Links to Foolslide reader links on a (front) page.
 Is only set to work for [Akashi Scans](http://akashiscans.com/) by default,
 but should work for any page you know contains links to a [FoOlslide](https://foolcode.github.io/FoOlSlide/) reader.
 
-<div class="screenshots">
+<div class="screenshots" style="text-align: center; max-wdith: 80%">
 	<h5>Screenshots:</h5>
     <img src="http://i.imgur.com/0UpEihx.png" alt="Download links" />
     <br />
@@ -75,7 +62,7 @@ but should work for any page you know contains links to a [FoOlslide](https://fo
 Provides direct image and external download links for the the 
 [MangaStream](http://mangastream.com/) Reader.
 
-<div class="screenshots">
+ <div class="screenshots" style="text-align: center; max-wdith: 80%">
 	<h5>Screenshots:</h5>
     <img src="http://i.imgur.com/ieHxlwd.png" alt="Navigation Menu" />
     <img src="http://i.imgur.com/474MQmC.png" width="33%" alt="Direct Links" />
@@ -91,21 +78,21 @@ similar to the ones on Top Anime/Manga pages, to normal links.
 
 **Note**: This is a very dirty hack; it doesn't work great, and it never will.
 
-<div class="screenshots">
+<div class="screenshots" style="text-align: center; max-wdith: 80%">
 	<h5>Screenshots:</h5>
     <img src="http://i.imgur.com/7FWhhrR.png" alt="On shared lists" />
 	<img src="http://i.imgur.com/GWoKkvR.png" alt="On profiles" />
 </div>
 
 
-<h2 id="patreon-creator-activity-only">
+<h2 id="patreon-creator-activity-only" style="text-align: center; max-wdith: 80%">
 	[Patreon Creator Activity Only](patreon-creator-activity-only/Patreon_Creator_Activity_Only.user.js)
 </h2>
 
 Hides non-creator posts on [Patreon](https://www.patreon.com/)
 from a projects Activity page.
 
-<div class="screenshots">
+<div class="screenshots" style="text-align: center; max-wdith: 80%">
 	<h5>Screenshots:</h5>
     <img src="http://i.imgur.com/F21HAI5.png" width="45%" alt="Hide comments off" />
     <img src="http://i.imgur.com/J3KBBWo.png" width="45%" alt="Hide comments on"  />
@@ -119,7 +106,7 @@ from a projects Activity page.
 A no-nonsense userscript that hides watched videos from your subscription inbox on [Youtube](https://www.youtube.com/feed/subscriptions).
 
 
-<div class="screenshots">
+<div class="screenshots" style="text-align: center; max-wdith: 80%">
 	<h5>Screenshots:</h5>
     <img src="http://i.imgur.com/1i1P5bI.png" width="90%" alt="Navigation Menu" />
     <img src="http://i.imgur.com/4Y9AsDi.png" width="45%" alt="Hide Videos off" />
