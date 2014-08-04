@@ -13,7 +13,6 @@
 // @updateURL      https://rawgit.com/ToostInc/userscripts/master/mangastream-torrent-links/mangastream_torrent_link.meta.js
 // ==/UserScript==
 
-
 // The MIT License
 //
 // Copyright (c) 2010 Joost Bremmer

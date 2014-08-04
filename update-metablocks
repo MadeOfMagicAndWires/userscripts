@@ -1,0 +1,92 @@
+#!/bin/sh
+
+HELPMSG='
+##################################################################
+##                                                              ##
+## update-metablocks:                                           ##
+##                                                              ##
+## writes metablock data to meta.js files.                      ##
+##                                                              ##
+## Takes as arguments:                                          ##
+##       -w:  Write to file(s), without this it will do a       ##
+##  --write: dryrun and outputs to stdout                       ##
+##                                                              ##
+##   --help: Prints a help message.                             ##
+##                                                              ##
+##       -o: Optional output file, default is inputfile.meta.js ##
+## --output:                                                    ##
+##                                                              ##
+##     file: Input userscript file.                             ## 
+##                                                              ##
+##################################################################
+'
+
+DRYRUN=true;
+INPUTFILE="";
+OUTPUTFILE="";
+OUTPUTFILEBOOL=false;
+
+writeoutput () {
+	if $DRYRUN; then
+	 	egrep -B 100 "==/UserScript=="  ${INPUTFILE};
+	else
+		echo "Writing metablock from \"${INPUTFILE}\" into \"${OUTPUTFILE}\"";
+	 	egrep -B 100 "==/UserScript=="  ${INPUTFILE} > ${OUTPUTFILE};
+	fi
+		
+}
+
+
+if test $# -eq 0; then
+	echo "No arguments specified!";
+	echo "${HELPMSG}";
+fi
+
+
+while test $# -gt 0; do
+    
+	case $1 in 
+		-w|--write)
+			DRYRUN=false;
+			shift 1;
+		;;
+		
+		--help)
+			echo "$HELPMSG";
+			exit 0;
+		;;
+		
+		-o|--output)
+			shift 1;
+			if test $# -gt 0; then
+				OUTPUTFILE=$1;
+				OUTPUTFILEBOOL=true;
+			else
+				echo "no outputfile specified"
+				echo "$HELPMSG"
+				exit 1;
+			fi
+			shift 1;
+		;;
+
+		*)
+			if test $# -gt 0; then
+				INPUTFILE="$1"
+
+				if [[ !$OUTPUTFILE  ]]; then
+					OUTPUTFILE=$(echo "$INPUTFILE" | sed 's/user/meta/g');
+				fi
+				writeoutput;
+				
+			else
+				echo "No files given!"
+				echo "$HELPMSG"
+				exit 1;
+			fi
+			shift 1;
+		;;
+	esac
+	
+done
+
+#vim: set ts=2 sw=2
