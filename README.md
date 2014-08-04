@@ -16,7 +16,7 @@ Index
  * [MyAnimeList Hover Info](#myanimelist-hover-info)
  * [Patreon Creator Activity Only](#patreon-creator-activity-only)
  * [Youtube Hide Watched](#youtube-hide-watched)
-
+ * [update-metablocks](#update-metablocks)
 
 
 
@@ -112,3 +112,20 @@ A no-nonsense userscript that hides watched videos from your subscription inbox 
     <img src="http://i.imgur.com/4Y9AsDi.png" width="45%" alt="Hide Videos off" />
     <img src="http://i.imgur.com/4EuPN1x.png" width="45%" alt="Hide videos on"  />
 </div>
+
+
+<h2 id="update-metablocks">
+	<a href="update-metablocks">update-metablocks</a>
+</h2>
+
+update-metablocks is a small shell script that takes the  
+```javascript
+       ==Userscript==
+
+      ==/Userscript==
+```
+metablocks from userscript files, and copies them into *.meta.js files.  
+It's current features also inclede automatic @date updating and insertion.
+
+For examples run ```sh $ ./update-metablocks --help```;  
+or ```sh ./update-metablocks */*.user.js``` to do a dry run on all user.js files.
