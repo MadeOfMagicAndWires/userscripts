@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        Foolslide Download Links
+// @name        FoOlslide Download Links
 // @namespace   https://github.com/ToostInc/userscripts
 // @description Adds Download Links to Foolslide reader links on a (front) page
 // @include     http://akashiscans.com/

@@ -21,7 +21,7 @@ Index
 
 
 <h2 id="batoto-download-links">
-	[Batoto Download links](batoto-direct-links/batoto_direct_links.user.js)
+	<a href="batoto-direct-links/batoto_direct_links.user.js">Batoto Direct Links</a>
 </h2>
 
 Adds direct links to every image when reading a chapter on [Batoto](http://http://www.batoto.net),
@@ -38,7 +38,7 @@ so that they may be easily downloaded.
 
 
 <h2 id="foolslide-download-links">
-	[Foolslide Download Links](foolslide-download-links/foolslide-download-links.user.js)
+        <a href="foolslide-download-links/foolslide-download-links.user.js">FoOlslide Download Links</a>
 </h2>
 
 Adds Download Links to Foolslide reader links on a (front) page.
@@ -56,7 +56,7 @@ but should work for any page you know contains links to a [FoOlslide](https://fo
 
 
 <h2 id="mangastream-torrent-links">
-	[MangaStream Torrent Links](mangastream-torrent-links/mangastream_torrent_link.user.js)
+	<a href="mangastream-torrent-links/mangastream_torrent_link.user.js">Mangastream Torrent Links</a>
 </h2>
 
 Provides direct image and external download links for the the 
@@ -70,7 +70,7 @@ Provides direct image and external download links for the the
 </div>
 
 <h2 id="myanimelist-hover-info">
-	[MyAnimeList Hover Info](myanimelist-hover-info/myanimelist-hover-info.user.js)
+	<a href="myanimelist-hover-info/myanimelist-hover-info.user.js">MyAnimeList Hover Info</a>
 </h2>
 
 Adds hovering info boxes to links on [MyAnimeList](http://myanimelist.net) 
@@ -85,8 +85,8 @@ similar to the ones on Top Anime/Manga pages, to normal links.
 </div>
 
 
-<h2 id="patreon-creator-activity-only" style="text-align: center; max-wdith: 80%">
-	[Patreon Creator Activity Only](patreon-creator-activity-only/Patreon_Creator_Activity_Only.user.js)
+<h2 id="patreon-creator-activity-only">
+	<a href="patreon-creator-activity-only/Patreon_Creator_Activity_Only.user.js">Patreon Activity Only</a>
 </h2>
 
 Hides non-creator posts on [Patreon](https://www.patreon.com/)
@@ -100,7 +100,7 @@ from a projects Activity page.
 
 
 <h2 id="youtube-hide-watched">
-	[Youtube Hide Watched](youtube-hide-watched/youtube-hide-watched.user.js)
+	<a href="youtube-hide-watched/youtube-hide-watched.user.js">Youtube Hide Watched</a>
 </h2>
 
 A no-nonsense userscript that hides watched videos from your subscription inbox on [Youtube](https://www.youtube.com/feed/subscriptions).
