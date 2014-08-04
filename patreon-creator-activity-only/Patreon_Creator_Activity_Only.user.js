@@ -6,8 +6,10 @@
 // @version     1.0
 // @copyright   2014, Joost Bremmer
 // @licence     MIT
-// @grant       none
 // @require     http://code.jquery.com/jquery-latest.min.js
+// @downloadURL https://github.com/ToostInc/userscripts/raw/master/patreon-creator-activity-only/Patreon_Creator_Activity_Only.user.js
+// @updateurl   https://github.com/ToostInc/userscripts/raw/master/patreon-creator-activity-only/Patreon_Creator_Activity_Only.meta.js
+// @grant       none
 // ==/UserScript==
 
 

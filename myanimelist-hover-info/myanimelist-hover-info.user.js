@@ -13,12 +13,14 @@
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @require        http://code.jquery.com/jquery-migrate-1.2.1.js
 // @require        http://cdn.myanimelist.net/js/hover.v5.js
+// @downloadURL    https://rawgit.com/ToostInc/userscripts/master/myanimelist-hover-info/myanimelist-hover-info.user.js
+// @updateURL      https://rawgit.com/ToostInc/userscripts/master/myanimelist-hover-info/myanimelist-hover-info.meta.js
 // @grant          none
 // ==/UserScript==
 
 // The MIT License
 //
-// Copyright (c) 2014 Joost Bremmer
+// Copyright (c) 2010 Joost Bremmer
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files

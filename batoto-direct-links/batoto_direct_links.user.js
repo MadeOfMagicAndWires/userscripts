@@ -8,6 +8,8 @@
 // @version        1.0
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_addStyle
+// @downloadURL    https://rawgit.com/ToostInc/userscripts/master/batoto-direct-links/batoto_direct_links.user.js
+// @updateURL      https://rawgit.com/ToostInc/userscripts/master/batoto-direct-links/batoto_direct_links.meta.js 
 // ==/UserScript==
 
 

@@ -5,9 +5,11 @@
 // @include        https://www.youtube.com/feed/subscriptions*
 // @copyright      2014, Joost Bremmer
 // @license        MIT
-// @version        1.0
+// @version        1.1
 // @require        http://code.jquery.com/jquery-latest.min.js
-// @grant          unsafeWindow
+// @downloadURL    https://rawgit.com/ToostInc/userscripts/master/youtube-hide-watched/youtube-hide-watched.user.js
+// @updateURL      https://rawgit.com/ToostInc/userscripts/master/youtube-hide-watched/youtube-hide-watched.meta.js
+// @grant          none
 // ==/UserScript==
 
 // The MIT License
