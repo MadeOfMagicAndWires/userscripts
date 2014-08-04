@@ -80,8 +80,8 @@ similar to the ones on Top Anime/Manga pages, to normal links.
 
 <div class="screenshots" style="max-width: 80%" align="center">
 	<h5>Screenshots:</h5>
-    <img src="http://i.imgur.com/7FWhhrR.png" alt="On shared lists" />
-	<img src="http://i.imgur.com/GWoKkvR.png" alt="On profiles" />
+    <img src="http://i.imgur.com/7FWhhrR.png" width="45%"alt="On shared lists" />
+	<img src="http://i.imgur.com/GWoKkvR.png" width="45%"alt="On profiles" />
 </div>
 
 
