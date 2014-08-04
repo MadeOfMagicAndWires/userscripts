@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           Botato Direct Links
+// @name           Batoto Direct Links
 // @namespace      https://github.com/ToostInc/userscripts
 // @description    Adds Direct Links to the online reader
 // @include        http://www.batoto.net/read/_/*
