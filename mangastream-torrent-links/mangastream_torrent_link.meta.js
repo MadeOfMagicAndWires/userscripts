@@ -4,9 +4,11 @@
 // @description    Adds Torrent links to the read online pages
 // @include        http://www.readms.com/r/*
 // @include        http://readms.com/r/*
+// @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2010+, Joost Bremmer
 // @license        MIT
-// @version        1.6
+// @version        2.0
+// @date           04-08-2014  
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_xmlhttpRequest
 // @downloadURL    https://rawgit.com/ToostInc/userscripts/master/mangastream-torrent-links/mangastream_torrent_link.user.js

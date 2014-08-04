@@ -7,9 +7,11 @@
 // @include        http://myanimelist.net/profile/*
 // @exclude        http://myanimelist.net/topanime.php
 // @exclude        http://myanimelist.net/topmanga.php
+// @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2010+, Joost Bremmer
 // @license        MIT 
 // @version        0.7
+// @date           04-08-2014  
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @require        http://code.jquery.com/jquery-migrate-1.2.1.js
 // @require        http://cdn.myanimelist.net/js/hover.v5.js

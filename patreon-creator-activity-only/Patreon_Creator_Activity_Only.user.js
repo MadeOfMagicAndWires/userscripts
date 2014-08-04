@@ -4,6 +4,8 @@
 // @description Hides non-creator comments on a projects Activity page
 // @include     http://www.patreon.com/*?ty=a
 // @version     1.0
+// @date           04-08-2014  
+// @author      Joost Bremmer < toost dot b at gmail dot com >
 // @copyright   2014, Joost Bremmer
 // @licence     MIT
 // @require     http://code.jquery.com/jquery-latest.min.js
