@@ -83,7 +83,7 @@ function hideWatched () {
 	
 	if ( $("#hide-videos").is(":checked") ) {
 			$("div.watched-badge").each(function() {
-	      $(this).closest("li.feed-item-container").hide("400");
+	      $(this).closest("li.feed-item-container").hide("200");
 		
 	    });
 
@@ -92,7 +92,7 @@ function hideWatched () {
 
 function showWatched() {
 		  $("div.watched-badge").each(function() {
-	      $(this).closest("li.feed-item-container").show("400");
+	      $(this).closest("li.feed-item-container").show("300");
 		
 	  });
 }

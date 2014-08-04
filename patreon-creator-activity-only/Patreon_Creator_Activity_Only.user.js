@@ -3,7 +3,7 @@
 // @namespace   https://github.com/ToostInc/userscripts
 // @description Hides non-creator comments on a projects Activity page
 // @include     http://www.patreon.com/*?ty=a
-// @version     1
+// @version     1.0
 // @copyright   2014, Joost Bremmer
 // @licence     MIT
 // @grant       none

@@ -5,7 +5,7 @@
 // @include     http://akashiscans.com/
 // @copyright   2014, Joost Bremmer
 // @license     MIT
-// @version     2
+// @version     1.0
 // @require     http://code.jquery.com/jquery-latest.min.js
 // @grant       none
 // ==/UserScript==
@@ -39,18 +39,15 @@ $(document).ready (function () {
 
     //Start!
 
-    $("div.entry-content > p > a[href^='http://reader']").attr("id", "readerlink");
-
-    $("#readrlink").attr("title", "test")
 
     $("div.entry-content > p > a[href^='http://reader.']").each(function (i) {
 
         var readlink = $(this).attr('href');
-	var downloadlink = readlink.replace(/\/read\//g, "\/download\/");
-	var downloadlink = downloadlink.replace(/page\/1$/, "");
-	var download = " | <a href='"+downloadlink+"'>Download</a>";
-	//console.log(download);
-	$(this).after(download);
+	      var downloadlink = readlink.replace(/\/read\//g, "\/download\/");
+	      var downloadlink = downloadlink.replace(/page\/1$/, "");
+	      var download = " | <a href='"+downloadlink+"'>Download</a>";
+	      //console.log(download);
+	      $(this).after(download);
 	
 
     });
