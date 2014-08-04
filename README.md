@@ -12,7 +12,7 @@ Index
 -----
  * [Batoto Download Links](#batoto-download-links)
  * [Foolslide Download Links](#foolslide-download-links)
- * [Mangastream Torrent Links](#mangastream-torrent-links)
+ * [MangaStream Torrent Links](#mangastream-torrent-links)
  * [MyAnimeList Hover Info](#myanimelist-hover-info)
  * [Patreon Creator Activity Only](#patreon-creator-activity-only)
  * [Youtube Hide Watched](#youtube-hide-watched)
