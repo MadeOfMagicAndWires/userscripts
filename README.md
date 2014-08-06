@@ -11,6 +11,7 @@ as I prefer offline readers like [MComix](http://sourceforge.net/projects/mcomix
 Index
 -----
  * [Batoto Download Links](#batoto-download-links)
+ * [Casanova Download Links](#casanova-download-)
  * [Foolslide Download Links](#foolslide-download-links)
  * [MangaStream Torrent Links](#mangastream-torrent-links)
  * [MyAnimeList Hover Info](#myanimelist-hover-info)
@@ -31,10 +32,28 @@ so that they may be easily downloaded.
 <div class="screenshots" style="max-width: 80%" align="center">
 	<h5>Screenshots:</h5>
 	<img src="http://i.imgur.com/VXo2aAB.png" width="90%" alt="Navigation Menu" />
-    <img src="http://i.imgur.com/Lz1oCWh.png" width="45%" alt="Batoto Direct Links" />
+    <img src="http://i.imgur.com/vs2NRDg.png" width="45%" alt="Batoto Direct Links" />
     <img src="http://i.imgur.com/FpaIC0D.png" width="45%" alt="Batoto Clean" />
 
 </div>
+
+
+<h2 id="casanova-download-links">
+	<a href="casanova-direct-links/casanova_direct_links.user.js">Casanova Direct Links</a>
+</h2>
+
+Adds direct links to every image when reading a chapter on [Casanovascans](http://casanovascans.com/).  
+Essentially the exact same script as Batoto Direct Links, only updated to grab all the pages using  
+**xmlhttpRequests**.
+
+<div class="screenshots" style="max-width: 80%" align="center">
+	<h5>Screenshots:</h5>
+	<img src="http://i.imgur.com/yZM4g3N.png" width="90%" alt="Navigation Menu" />
+    <img src="http://i.imgur.com/avwGbHv.png" width="45%" alt="Casanova Direct Links" />
+    <img src="http://i.imgur.com/xh6lFE1.png" width="45%" alt="Casanova Clean" />
+
+</div>
+
 
 
 <h2 id="foolslide-download-links">

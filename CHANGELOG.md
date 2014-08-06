@@ -4,6 +4,7 @@ CHANGELOG
 ##Index
 
  * [Batoto Download Links](#batoto-download-links)
+ * [Casanova Download Links](#casanova-download-links)
  * [Foolslide Download Links](#foolslide-download-links)
  * [MangaStream Torrent Links](#mangastream-torrent-links)
  * [MyAnimeList Hover Info](#myanimelist-hover-info)
@@ -20,6 +21,19 @@ CHANGELOG
 
 #####Version 1.0
  *  Initial version.
+
+#####Version 2.0
+ *  Script now uses **xmlhttpRequests** to fetch image urls.
+
+<h3 id="casanova-download-links">
+	<a href="casanova-direct-links/casanova.user.js">Casanova Direct Links</a>
+</h3>
+
+#####Version 1.0
+ *  Initial version.
+
+#####Version 1.2
+ *  Script now uses **xmlhttpRequests** to fetch image urls.
 
 <h3 id="foolslide-download-links">
         <a href="foolslide-download-links/foolslide-download-links.user.js">FoOlslide Download Links</a>

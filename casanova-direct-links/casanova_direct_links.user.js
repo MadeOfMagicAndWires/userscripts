@@ -1,18 +1,18 @@
 // ==UserScript==
-// @name           Batoto Direct Links
+// @name           Casanova Direct Links
 // @namespace      https://github.com/ToostInc/userscripts
 // @description    Adds Direct Links to the online reader
-// @include        http://www.batoto.net/read/_/*
+// @include        http://casanovascans.com/read/*
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2014, Joost Bremmer
 // @license        MIT
-// @version        2.0
+// @version        1.2
 // @date           06-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_addStyle
 // @grant          GM_xmlhttpRequest
-// @downloadURL    https://rawgit.com/ToostInc/userscripts/master/batoto-direct-links/batoto_direct_links.user.js
-// @updateURL      https://rawgit.com/ToostInc/userscripts/master/batoto-direct-links/batoto_direct_links.meta.js 
+// @downloadURL    https://rawgit.com/ToostInc/userscripts/master/casanova-direct-links/casanova_direct_links.user.js
+// @updateURL      https://rawgit.com/ToostInc/userscripts/master/casanova-direct-links/casanova_direct_links.meta.js 
 // ==/UserScript==
 
 
@@ -46,53 +46,47 @@ $(document).ready (function () {
 	
 
 	//Add various tabs
-	var dlinks       = "<div id='dlinks' class='rounded dlinks'>\n" +
+	var dlinks       = "<div id='dlinks' class='uk-navbar-nav dlinks'>\n" +
 	                     "\t<h3>Direct Links:</h3>\n" +
-					     "\t<br />\n" +
 					   "</div>";
-	var dlinksanchor = "<li style='display: inline-block; margin-right: 20px;'>\n" +
-	                     "\t<button type='button' id='dlinksanchor'>" +
-					          "Direct Links" +
-					       "</button>\n" +
+	var dlinksanchor = "<li class='uk-parent' id='dlinksli'>\n" +
+	                     "\t<a href='#' id='dlinksanchor' style=''>" +
+					          "<p>Direct Links</p>" +
+					       "</a>\n" +
 					   "</li>";
-	
+
+
+
 	
 	//insert tabs
-	$("#read_settings").before(dlinks);
-	$("div.moderation_bar li:last-child").before(dlinksanchor);
+	$("nav.uk-navbar > ul.uk-navbar-nav").append(dlinksanchor);
+	$("div.uk-container nav.uk-navbar").after(dlinks);
 	
 	//style tabs
 
-	GM_addStyle(".dlinks {" +
+	GM_addStyle("#dlinks {" +
 							  "background-color: #FFFFFF;" +
 							  "padding-top: 10px;" +
 							  "padding-bottom: 05px;" +
 							  "display: none;" +
 							  "text-align: center;" +
-							  "border-top: 1px solid #CDCDCD;" +
-							  "border-top-right-radius:0px;"+ 
-							  "border-top-left-radius: 0px;" +
-							  "border-bottom: 1px solid #CDCDCD;"+
 							  "z-index: 999; position: absolute;" +
 							  "width: 100%;"+
 							  "left: 0px;"+
 							"}"
 						 );
-	$("#comic_wrap").css("z-index","499")
-	
-
-	
 
 	//get image source
-	var imgsrc = $("img#comic_page").attr("src");
+	var imgsrc = $("img.open").attr("src");
 	var imgsrc = imgsrc.split("/");
+	//console.log(imgsrc);
 		
 	//get total amount of pages
-	var pages  = $("select#page_select option:last").html();
-	var pages = pages.replace(/page./g, '');
-		
-		
-	//insert links into Direct Links div.
+	var pages  = $("a[title$='Pages']").html();
+	var pages = pages.replace(/\s\<i.*\<\/i\>$/, "");
+	//console.log(pages);
+	
+	//insert message into Direct Links div.
 	var dlmesg = '<p>\n' +
 	                '\tUse "Right-click > Save As" dialogue,' +
 				      'or a download manager like ' +
@@ -100,45 +94,46 @@ $(document).ready (function () {
 					    'DownThemAll'+
 					  '</a> ' +
 			          'to save the images.\n' +
-				  '<br /><br />' +
+				  '<br />' +
 	              '</p>\n' +
 				  '<a href="#" id="dlloading">' + 
 				  	'\tLoading...'+
 				  	'\t<br />\n' +
 				  '</a>';
-	
+
 	$("#dlinks").append(dlmesg);
+	$("#dlinks").css("font-family", "'Courier'");	
 
 	//event handler click on 'Direct Links' button.
 	$("#dlinksanchor").click( function() {
-	
-		$("#dlinks").slideToggle("slow");
-				
+	  $("#dlinks").slideToggle("slow");
 	});
 	
-	$("#page_select:first > option").each(function() {
-  	var nextpage = $(this).attr("value");  	
+	$(".uk-dropdown-small > ul:nth-child(1) li").each(function() {
+  	var nextpage = $(this).children("a").attr("href");  	
 		//console.log(nextpage);
-
+		
 		GM_xmlhttpRequest({
   	method: "GET",
   	url: nextpage,
   	onload: function(response) {
 			//console.log(response.responseText);
-	
-			if ( response.responseText.indexOf('id="comic_page"') > 0 ) {
+			
+
+			
+			if ( response.responseText.indexOf('class="open"') > 0 ) {
 				var raw = response.responseText;
-				var content = /<img.*comic_page.*>/.exec(raw)
+				var content = /<img.*open.*>/.exec(raw)
 				//console.log(content);
-				var imglink = /"http.*(png|jpg)"/.exec(content);
-				console.log(imglink[0]);
+				var imglink = /"http.*"/.exec(content);
+				//console.log(imglink[0]);
 				
 				
-				var pagenum = /\d*\.(png|jpg)/.exec(imglink[0]);
-				console.log(pagenum[0]);
+				var pagenum = /\d{2}\.(png|jpg)/.exec(imglink[0]);
+				//console.log(pagenum[0]);
 				var newpageanchor= '<a href=' + imglink[0] + 'id="page' + 
-														/\d*/.exec(pagenum[0]) + '">\n' +
-										"\t" + pagenum[0] + "<br />" +
+														/\d{2}/.exec(pagenum[0]) + '">\n' +
+										"\tPage " + /\d{2}/.exec(pagenum[0]) + "<br />" +
 								   '</a>';
 				
 			}
@@ -150,7 +145,7 @@ $(document).ready (function () {
 			}
 			
 			$("#dlinks").append(newpageanchor);
-
+		
 		 }
 		});
 	
@@ -161,7 +156,5 @@ $(document).ready (function () {
 		
 	});
 
-
 });
-
 
