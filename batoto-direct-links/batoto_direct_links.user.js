@@ -150,6 +150,14 @@ $(document).ready (function () {
 			}
 			
 			$("#dlinks").append(newpageanchor);
+			
+			//sort links
+			$('#dlinks a[id^="page"]').sort(function (a, b) {
+    		var re = /[^\d]/g;
+    		return ~~a.id.replace(re, '') > ~~b.id.replace(re, '');
+			})
+			.appendTo("#dlinks");
+			
 
 		 }
 		});

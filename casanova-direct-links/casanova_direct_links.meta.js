@@ -6,7 +6,7 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2014, Joost Bremmer
 // @license        MIT
-// @version        1.2
+// @version        1.3
 // @date           06-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_addStyle

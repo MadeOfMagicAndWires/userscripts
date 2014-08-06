@@ -25,6 +25,9 @@ CHANGELOG
 #####Version 2.0
  *  Script now uses **xmlhttpRequests** to fetch image urls.
 
+#####Version 2.1
+ +  Links are now sorted.
+
 <h3 id="casanova-download-links">
 	<a href="casanova-direct-links/casanova.user.js">Casanova Direct Links</a>
 </h3>
@@ -34,6 +37,9 @@ CHANGELOG
 
 #####Version 1.2
  *  Script now uses **xmlhttpRequests** to fetch image urls.
+
+#####Version 1.3
+ *  Links are now sorted.
 
 <h3 id="foolslide-download-links">
         <a href="foolslide-download-links/foolslide-download-links.user.js">FoOlslide Download Links</a>

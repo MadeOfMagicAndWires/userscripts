@@ -6,7 +6,7 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2014, Joost Bremmer
 // @license        MIT
-// @version        1.2
+// @version        1.3
 // @date           06-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_addStyle
@@ -140,21 +140,35 @@ $(document).ready (function () {
 			
 			else {
 				imglink[0] = "image not found!";
+				pagenum = [""];
+				pagenum.push(/\d*$/.exec(newpage));
 				var newpageanchor='<a href="#" class="404">Uh-oh.something went wrong</a>' + 
 								  '<br />';
 			}
 			
 			$("#dlinks").append(newpageanchor);
-		
+
+			//sort links
+			$('#dlinks a[id^="page"]').sort(function (a, b) {
+    		var re = /[^\d]/g;
+    		return ~~a.id.replace(re, '') > ~~b.id.replace(re, '');
+			})
+			.appendTo("#dlinks");
+		 
+		 
+		 
 		 }
 		});
 	
 		if ( $(this).is(":last-child") ) {
 				$("#dlloading").remove();
 		}
-		
+	
 		
 	});
 
+	
+	
+	
 });
 
