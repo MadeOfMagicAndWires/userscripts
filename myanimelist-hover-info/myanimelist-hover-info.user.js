@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MAL Hover Info
 // @namespace      https://github.com/ToostInc/userscripts
-// @description    Adds hovering info boxes like on the Top Anime/Manga pages 
+// @description    Adds hovering info boxes like on the Top Anime/Manga pages
 // @include        http://myanimelist.net/shared.php*
 // @include        http://myanimelist.net/sharedmanga.php*
 // @include        http://myanimelist.net/profile/*
@@ -9,9 +9,9 @@
 // @exclude        http://myanimelist.net/topmanga.php
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2010+, Joost Bremmer
-// @license        MIT 
+// @license        MIT
 // @version        0.7
-// @date           04-08-2014  
+// @date           18-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @require        http://code.jquery.com/jquery-migrate-1.2.1.js
 // @require        http://cdn.myanimelist.net/js/hover.v5.js
@@ -53,14 +53,14 @@ $(document).ready (function () {
 
 
 	}
-	
+
 	else if (typeof showInfo != undefined) {
 		console.log("hover.v4.js is loaded");
 
-	
+
 
 		$('a[href*="/anime/"]').addClass('hoverinfo_trigger').each( function () {
-	
+
 			var href= $(this).attr("href");
 			var href= href.split("/");
 			var divrel=  "a"+href[2];
@@ -71,11 +71,11 @@ $(document).ready (function () {
 			var div=  '<div id="'+divid+'" >\n\t<div id="'+divinfo+'" class="hoverinfo"'
 			      +   'rel="'+divrel+'" > </div>\n</div>'
 			$(this).attr('rel',arel).attr("id",aid).before(div);
-		
+
 		});
 
 		$('a[href*="/manga/"]').addClass('hoverinfo_trigger').each( function () {
-	
+
 			var href= $(this).attr("href");
 			var href= href.split("/");
 			var divrel=  "m"+href[2];
@@ -83,10 +83,10 @@ $(document).ready (function () {
 			var divid=   "area"+href[2];
 			var arel=    "#"+divinfo;
 			var aid=     "#"+divid;
-			var div=  '<div id="'+divid+'" >\n\t<div id="'+divinfo+'" class="hoverinfo"' 
+			var div=  '<div id="'+divid+'" >\n\t<div id="'+divinfo+'" class="hoverinfo"'
 			      +   'rel="'+divrel+'" > </div>\n</div>'
 			$(this).attr('rel',arel).attr("id",aid).before(div);
-		
+
 		});
 
 

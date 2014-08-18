@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MAL Hover Info
 // @namespace      https://github.com/ToostInc/userscripts
-// @description    Adds hovering info boxes like on the Top Anime/Manga pages 
+// @description    Adds hovering info boxes like on the Top Anime/Manga pages
 // @include        http://myanimelist.net/shared.php*
 // @include        http://myanimelist.net/sharedmanga.php*
 // @include        http://myanimelist.net/profile/*
@@ -9,9 +9,9 @@
 // @exclude        http://myanimelist.net/topmanga.php
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2010+, Joost Bremmer
-// @license        MIT 
+// @license        MIT
 // @version        0.7
-// @date           04-08-2014  
+// @date           18-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @require        http://code.jquery.com/jquery-migrate-1.2.1.js
 // @require        http://cdn.myanimelist.net/js/hover.v5.js
