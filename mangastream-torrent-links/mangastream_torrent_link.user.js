@@ -7,7 +7,7 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2010+, Joost Bremmer
 // @license        MIT
-// @version        3.0
+// @version        3.0.1
 // @date           18-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_xmlhttpRequest
@@ -39,7 +39,7 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 $(document).ready (function () {
-	
+
 
 	//Add various tabs
 
@@ -49,28 +49,29 @@ $(document).ready (function () {
 	var dlinksanchor="&nbsp&nbsp<div class='btn' id='dlinksanchor'>Direct Links</div>"
 	$("#Torrentsbtn").after(dlinksanchor);
 
-		//Direct Links	
+		//Direct Links
 	var dlinks = "<div class='subnav pager' id='dlinks' style='display: none;" +
-	                   "border-top: 1px solid #CDCDCD;"+
-					   " left: 0px;'>\n\tDirect links:" +
-				       "\n\t<br />"+
-			         "</div>"
+					   "border-top: 1px solid #CDCDCD;"+
+					   "z-index: 499; left: 0px;'>"+
+				 "\n\tDirect links:" +
+				 "\n\t<br />"+
+				 "</div>"
 	$("ul.pager").after(dlinks);
-	
+
 	var torrents = '<div class="subnav pager" id="results"'+
 						'style="display: none; border-top: 1px solid #CDCDCD; left: 0px;' +
-							   'z-index: 499;padding-bottom: 05px;">
+						'padding-bottom: 05px;">' +
 				   '\n\t<h2>Torrent:</h2>' +
 				   '\n\t<span id="torrentlink">Searching...</span>' +
 				   '\n\n' +
-				   </div>'
+				   '</div>'
 	$("#dlinks").before(torrents);
-	
 
-	
 
-	
-	
+
+
+
+
 	//insert links into Direct Links div.
 	var dlmesg = '<p id="dlmesg">\n' +
 	                '\tUse "Right-click > Save As" dialogue,' +
@@ -85,9 +86,9 @@ $(document).ready (function () {
 					'\tLoading...'+
 					'\t<br />\n' +
 				  '</a>';
-	
+
 	$("#dlinks").append(dlmesg);
-	
+
 
 
 	//Function for clicking Torrents
@@ -108,9 +109,9 @@ $(document).ready (function () {
 		          "&cat=0&listorder=1&page=search&sort=1"
 
 		//console.log(url);
-		
+
 		$("#results").slideToggle("slow");
-			
+
 		GM_xmlhttpRequest({
 		method: "POST",
 		url: url,
@@ -135,11 +136,11 @@ $(document).ready (function () {
 						              .exec(raw);
 						//console.log(content);
 						var torrentlink = content.toString();
-					}	
-						
-					//console.log(torrentlink);			
+					}
+
+					//console.log(torrentlink);
 					$("#torrentlink").html(torrentlink);
-					
+
 				}
 
 				else if(response.responseText.indexOf("No torrents found.") > -1) {
@@ -147,92 +148,91 @@ $(document).ready (function () {
 					var otherurl  = "http://www.nyaa.eu/?term="+othertitle+
 					                "&cats=2_0&listorder=1&page=search&sort=1";
 					var otherlink = "No Results Found...Maybe search for <a href='"
-					                +otherurl+"' id='otherurl'>other</a> groups?";					
+					                +otherurl+"' id='otherurl'>other</a> groups?";
 					$("#torrentlink").html(otherlink);
-					
+
 				}
 			}
 
 		});
-		
-	
+
 	});
+
+
 
 	//Function for clicking Direct Links
 	$("#dlinksanchor").click( function directlinks() {
-	
-			//get image source
-			var imgsrc = $("img#manga-page").attr("src");
-			//console.log("current image is: " + imgsrc);
-			
-		
-			//get total amount of pages
-			var pages  = $("div.btn-group:nth-child(2) > ul li:last > a").html();
-			var pages = pages.match(/\d{2}/g);
-			console.log("Total amount of pages: " + pages);
-		
-			var baseurl = location.href;
-			var baseurl = baseurl.split("/");
-		
-		$("#dlinks").slideToggle("slow");			
-			
-			for (var i = 1 ; i < pages; i++) {
 
-				var nextpage = baseurl.slice(0,7) + "/" + i;
-				var nextpage = nextpage.replace(/\,/g,"/");
-				
-				//console.log(nextpage);
+		$("#dlinks").slideToggle("slow");
+	});
 
-	
-			
-				GM_xmlhttpRequest({
-				method: "GET",
-				url: nextpage,
-				onload: function(response) {
-						//console.log(response.responseText);
-	
-						if ( response.responseText.indexOf('id="manga-page"') > 0 ) {
-							var raw = response.responseText;
-							var content = /<img.*manga-page.*>/.exec(raw)
-							//console.log(content);
-							var imglink = /"http.*(png|jpg)"/.exec(content);
-							console.log(imglink[0]);
-				
-				
-							var pagenum = /\d*..?(png|jpg)/.exec(imglink[0]);
-							console.log(pagenum[0]);
-							var newpageanchor= '<a href=' + imglink[0] + 'id="page' +
-																	/\d*.?/.exec(pagenum[0]) + '">\n' +
-																	"\t" + pagenum[0] + "<br />" +
-																	'</a>';
-				
-						}
-			
-						else {
-							imglink[0] = "image not found!";
-							var newpageanchor='<a href="#" class="404">Uh-oh.something went wrong</a>' +
-					                          '<br />';
-						}
-			
-						$("#dlinks").append(newpageanchor);
-			
-						//sort links
-						$('#dlinks a[id^="page"]').sort(function (a, b) {
-						var re = /[^\d]/g;
-						return ~~a.id.replace(re, '') > ~~b.id.replace(re, '');
-						})
-						.appendTo("#dlinks");
-			
+	//get image source
+	var imgsrc = $("img#manga-page").attr("src");
+	//console.log("current image is: " + imgsrc);
 
-					}
-				
-				});
-				
-		
-			};
+	//get total amount of pages
+	var pages  = $("div.btn-group:nth-child(2) > ul li:last > a").html();
+	var pages = pages.match(/\d{2}/g);
+	//console.log("Total amount of pages: " + pages);
 
-		$("#dlloading").remove();
+	var baseurl = location.href;
+	var baseurl = baseurl.split("/");
 
-    });
+	for (var i = 1 ; i < pages; i++) {
+
+		var nextpage = baseurl.slice(0,7) + "/" + i;
+		var nextpage = nextpage.replace(/\,/g,"/");
+
+		//console.log(nextpage);
+
+		GM_xmlhttpRequest({
+		method: "GET",
+		url: nextpage,
+		onload: function(response) {
+				//console.log(response.responseText);
+
+			if ( response.responseText.indexOf('id="manga-page"') > 0 ) {
+				var raw = response.responseText;
+				var content = /<img.*manga-page.*>/.exec(raw)
+				//console.log(content);
+				var imglink = /"http.*(png|jpg)"/.exec(content);
+				//console.log(imglink[0]);
+
+
+				var pagenum = /\d*..?(png|jpg)/.exec(imglink[0]);
+				//console.log(pagenum[0]);
+				var newpageanchor= '<a href=' + imglink[0] + 'id="page' +
+								   /\d*.?/.exec(pagenum[0]) + '">\n' +
+								   "\t" + pagenum[0] + "<br />" +
+								   '</a>';
+
+			}
+
+			else {
+				var imglink = [];
+				imglink[0] = "image not found!";
+				var newpageanchor='<a href="#" class="404">Uh-oh.something went wrong</a>' +
+				                  '<br />';
+			}
+
+			$("#dlinks").append(newpageanchor);
+
+			//sort links
+			$('#dlinks a[id^="page"]').sort(function (a, b) {
+				var re = /[^\d]/g;
+				return ~~a.id.replace(re, '') > ~~b.id.replace(re, '');
+			})
+			.appendTo("#dlinks");
+
+
+		 }
+
+		});
+
+
+	};
+
+	$("#dlloading").remove();
+
 
 });

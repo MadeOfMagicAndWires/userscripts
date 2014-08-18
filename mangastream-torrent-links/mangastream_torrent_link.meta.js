@@ -7,7 +7,7 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2010+, Joost Bremmer
 // @license        MIT
-// @version        3.0
+// @version        3.0.1
 // @date           18-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_xmlhttpRequest

@@ -67,6 +67,9 @@ CHANGELOG
 #####Version 3.0
  * Updated Direct Links List, now uses **xmlhttpRequests** to fetch every page link.
 
+######Version 3.0.1
+ * Fixed multiple versions of the same link being added every time the Direct Links button was clicked.
+
 <h3 id="myanimelist-hover-info">
 	<a href="myanimelist-hover-info/myanimelist-hover-info.user.js">MyAnimeList Hover Info</a>
 </h3>
