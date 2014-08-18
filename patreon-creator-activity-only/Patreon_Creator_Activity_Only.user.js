@@ -4,7 +4,7 @@
 // @description Hides non-creator comments on a projects Activity page
 // @include     http://www.patreon.com/*?ty=a
 // @version     1.0
-// @date           04-08-2014  
+// @date           18-08-2014
 // @author      Joost Bremmer < toost dot b at gmail dot com >
 // @copyright   2014, Joost Bremmer
 // @licence     MIT
@@ -48,16 +48,16 @@ $(document).ready (function() {
   //adding id to creatorposts and marking them clearly
   var creatorurl = location.href.replace(/\?.*/g, "");
   $("div.box .boxExtra .infoDiv .info a").each(function(){
-    
-    if ( $(this).attr("href") == creatorurl ) {
-      $(this).append("&nbsp<img src='http://www.patreon.com/images/patreon_tab.png' width='16' height='16' />").attr("id", "creator");      
-    } 
-  })
-  
 
-  
-  
-  
+    if ( $(this).attr("href") == creatorurl ) {
+      $(this).append("&nbsp<img src='http://www.patreon.com/images/patreon_tab.png' width='16' height='16' />").attr("id", "creator");
+    }
+  })
+
+
+
+
+
   $("#buttan").change(function() {
     if ($(this).prop("checked") ) {
       //console.log("Hide Comments Checked.");
@@ -77,16 +77,16 @@ function hideComments() {
 
   //for each comment, check if it's a creator's post (or in-line comment box), if not, hide it.
   $("div.box .boxExtra .infoDiv .info a").each( function() {
-    
+
     //console.log($(this).attr("id"));
-    
-     
+
+
     if ( $(this).attr("id") != "creator" )  {
       //console.log("This post will be hidden");
       $(this).parents("div.box").hide(400);
     }
 
-    
+
   })
 
   console.log("Comments hidden.");

@@ -6,13 +6,13 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2014, Joost Bremmer
 // @license        MIT
-// @version        1.3
-// @date           06-08-2014
+// @version        1.3.1
+// @date           18-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_addStyle
 // @grant          GM_xmlhttpRequest
 // @downloadURL    https://rawgit.com/ToostInc/userscripts/master/casanova-direct-links/casanova_direct_links.user.js
-// @updateURL      https://rawgit.com/ToostInc/userscripts/master/casanova-direct-links/casanova_direct_links.meta.js 
+// @updateURL      https://rawgit.com/ToostInc/userscripts/master/casanova-direct-links/casanova_direct_links.meta.js
 // ==/UserScript==
 
 
@@ -41,9 +41,9 @@
 //
 
 $(document).ready (function () {
-	
-	
-	
+
+
+
 
 	//Add various tabs
 	var dlinks       = "<div id='dlinks' class='uk-navbar-nav dlinks'>\n" +
@@ -57,11 +57,11 @@ $(document).ready (function () {
 
 
 
-	
+
 	//insert tabs
 	$("nav.uk-navbar > ul.uk-navbar-nav").append(dlinksanchor);
 	$("div.uk-container nav.uk-navbar").after(dlinks);
-	
+
 	//style tabs
 
 	GM_addStyle("#dlinks {" +
@@ -78,14 +78,13 @@ $(document).ready (function () {
 
 	//get image source
 	var imgsrc = $("img.open").attr("src");
-	var imgsrc = imgsrc.split("/");
 	//console.log(imgsrc);
-		
+
 	//get total amount of pages
 	var pages  = $("a[title$='Pages']").html();
 	var pages = pages.replace(/\s\<i.*\<\/i\>$/, "");
 	//console.log(pages);
-	
+
 	//insert message into Direct Links div.
 	var dlmesg = '<p>\n' +
 	                '\tUse "Right-click > Save As" dialogue,' +
@@ -96,79 +95,82 @@ $(document).ready (function () {
 			          'to save the images.\n' +
 				  '<br />' +
 	              '</p>\n' +
-				  '<a href="#" id="dlloading">' + 
-				  	'\tLoading...'+
-				  	'\t<br />\n' +
+				  '<a href="#" id="dlloading">' +
+					'\tLoading...'+
+					'\t<br />\n' +
 				  '</a>';
 
 	$("#dlinks").append(dlmesg);
-	$("#dlinks").css("font-family", "'Courier'");	
+	$("#dlinks ").css("font-family", "'Courier'");
 
 	//event handler click on 'Direct Links' button.
 	$("#dlinksanchor").click( function() {
 	  $("#dlinks").slideToggle("slow");
 	});
-	
-	$(".uk-dropdown-small > ul:nth-child(1) li").each(function() {
-  	var nextpage = $(this).children("a").attr("href");  	
-		//console.log(nextpage);
-		
-		GM_xmlhttpRequest({
-  	method: "GET",
-  	url: nextpage,
-  	onload: function(response) {
-			//console.log(response.responseText);
-			
 
-			
+	//fetch links
+	$(".uk-dropdown-small > ul:nth-child(1) li").each(function() {
+	var nextpage = $(this).children("a").attr("href");
+		//console.log(nextpage);
+
+	GM_xmlhttpRequest({
+	method: "GET",
+	url: nextpage,
+	onload: function(response) {
+			//console.log(response.responseText);
+
+
+
 			if ( response.responseText.indexOf('class="open"') > 0 ) {
 				var raw = response.responseText;
 				var content = /<img.*open.*>/.exec(raw)
 				//console.log(content);
 				var imglink = /"http.*"/.exec(content);
 				//console.log(imglink[0]);
-				
-				
+
+
 				var pagenum = /\d{2}\.(png|jpg)/.exec(imglink[0]);
 				//console.log(pagenum[0]);
-				var newpageanchor= '<a href=' + imglink[0] + 'id="page' + 
+				var newpageanchor= '<a href=' + imglink[0] + 'id="page' +
 														/\d{2}/.exec(pagenum[0]) + '">\n' +
 										"\tPage " + /\d{2}/.exec(pagenum[0]) + "<br />" +
 								   '</a>';
-				
+
 			}
-			
+
 			else {
 				imglink[0] = "image not found!";
 				pagenum = [""];
 				pagenum.push(/\d*$/.exec(newpage));
-				var newpageanchor='<a href="#" class="404">Uh-oh.something went wrong</a>' + 
+				var newpageanchor='<a href="#" class="404">Uh-oh.something went wrong</a>' +
 								  '<br />';
 			}
-			
+
+			//insert links
 			$("#dlinks").append(newpageanchor);
 
 			//sort links
 			$('#dlinks a[id^="page"]').sort(function (a, b) {
-    		var re = /[^\d]/g;
-    		return ~~a.id.replace(re, '') > ~~b.id.replace(re, '');
+			var re = /[^\d]/g;
+			return ~~a.id.replace(re, '') > ~~b.id.replace(re, '');
 			})
 			.appendTo("#dlinks");
-		 
-		 
-		 
+
+
+
 		 }
 		});
-	
+
+		//remove loading text
 		if ( $(this).is(":last-child") ) {
-				$("#dlloading").remove();
+			$("#dlloading").remove();
 		}
-	
-		
+
+
 	});
 
-	
-	
-	
+
+
+
 });
 

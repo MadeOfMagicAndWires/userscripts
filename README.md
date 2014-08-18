@@ -105,7 +105,7 @@ similar to the ones on Top Anime/Manga pages, to normal links.
 
 
 <h2 id="patreon-creator-activity-only">
-	<a href="patreon-creator-activity-only/Patreon_Creator_Activity_Only.user.js">Patreon Activity Only</a>
+	<a href="patreon-creator-activity-only/Patreon_Creator_Activity_Only.user.js">Patreon Creator Activity Only</a>
 </h2>
 
 Hides non-creator posts on [Patreon](https://www.patreon.com/)

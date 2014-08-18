@@ -7,8 +7,8 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2010+, Joost Bremmer
 // @license        MIT
-// @version        2.0
-// @date           04-08-2014  
+// @version        3.0
+// @date           18-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_xmlhttpRequest
 // @downloadURL    https://rawgit.com/ToostInc/userscripts/master/mangastream-torrent-links/mangastream_torrent_link.user.js
@@ -46,32 +46,48 @@ $(document).ready (function () {
 	var torrentsanchor = "&nbsp&nbsp<a href='#' id='Torrentsbtn' class='btn'>Torrents</a>";
 	$("div.btn-group:last").after(torrentsanchor);
 
+	var dlinksanchor="&nbsp&nbsp<div class='btn' id='dlinksanchor'>Direct Links</div>"
+	$("#Torrentsbtn").after(dlinksanchor);
 
-	//Add direct image links
-	$("div.page").attr('id','page');
-	var idtest = $("#p").attr('id');
-	//console.log("id of #p is "+idtest);
-	var imgsrc = $("img#manga-page").attr("src");
-	//console.log(imgsrc);
+		//Direct Links	
+	var dlinks = "<div class='subnav pager' id='dlinks' style='display: none;" +
+	                   "border-top: 1px solid #CDCDCD;"+
+					   " left: 0px;'>\n\tDirect links:" +
+				       "\n\t<br />"+
+			         "</div>"
+	$("ul.pager").after(dlinks);
 	
-	var imgshow = "<div class='subnav pager' id='directlink' style='display: none;"
-	               + "border-top: 1px solid #CDCDCD; left: 0px;'>\n\tDirect link:"
-				   + "\n\t<br />\n\t"+imgsrc+"</div>"
-	$("ul.pager").after(imgshow);
+	var torrents = '<div class="subnav pager" id="results"'+
+						'style="display: none; border-top: 1px solid #CDCDCD; left: 0px;' +
+							   'z-index: 499;padding-bottom: 05px;">
+				   '\n\t<h2>Torrent:</h2>' +
+				   '\n\t<span id="torrentlink">Searching...</span>' +
+				   '\n\n' +
+				   </div>'
+	$("#dlinks").before(torrents);
 	
-	var imganchor="&nbsp&nbsp<div class='btn' id='directlinkbtn'>Direct Link</div>"
-	$("#Torrentsbtn").after(imganchor);
-	
-  $( "#directlinkbtn" ).click(function() {
-     $("#directlink").slideToggle("slow")
-	 
-	});
 
-	var torrents = '<div class="subnav pager" id="results" style="display: none;' + 
-	               'border-top: 1px solid #CDCDCD; left: 0px; z-index: 499;' +
-				   'padding-bottom: 05px;">\n\t<h2>Torrent:</h2><span '+ 
-				   'id="torrentlink">Searching...</span>\n\n</div>'
-	$("#directlink").before(torrents);
+	
+
+	
+	
+	//insert links into Direct Links div.
+	var dlmesg = '<p id="dlmesg">\n' +
+	                '\tUse "Right-click > Save As" dialogue,' +
+				      'or a download manager like ' +
+			          '<a href="http://www.downthemall.net/" id="dta">' +
+					    'DownThemAll'+
+					  '</a> ' +
+			          'to save the images.\n' +
+				  '<br /><br />' +
+	              '</p>\n' +
+				  '<a href="#" id="dlloading">' +
+					'\tLoading...'+
+					'\t<br />\n' +
+				  '</a>';
+	
+	$("#dlinks").append(dlmesg);
+	
 
 
 	//Function for clicking Torrents
@@ -94,7 +110,7 @@ $(document).ready (function () {
 		//console.log(url);
 		
 		$("#results").slideToggle("slow");
-				
+			
 		GM_xmlhttpRequest({
 		method: "POST",
 		url: url,
@@ -106,7 +122,7 @@ $(document).ready (function () {
 					if (raw.indexOf("Files in torrent:") == -1) {
 						var content=/<td class="tlistdownload">.*?<\/td>/
 						            .exec(raw);
-						var content=content.toString().replace("www-dl.png", 
+						var content=content.toString().replace("www-dl.png",
 						"www-download.png");
 						//console.log(content);
 						var torrentlink = content.toString();
@@ -139,8 +155,84 @@ $(document).ready (function () {
 
 		});
 		
-
+	
 	});
 
+	//Function for clicking Direct Links
+	$("#dlinksanchor").click( function directlinks() {
+	
+			//get image source
+			var imgsrc = $("img#manga-page").attr("src");
+			//console.log("current image is: " + imgsrc);
+			
+		
+			//get total amount of pages
+			var pages  = $("div.btn-group:nth-child(2) > ul li:last > a").html();
+			var pages = pages.match(/\d{2}/g);
+			console.log("Total amount of pages: " + pages);
+		
+			var baseurl = location.href;
+			var baseurl = baseurl.split("/");
+		
+		$("#dlinks").slideToggle("slow");			
+			
+			for (var i = 1 ; i < pages; i++) {
+
+				var nextpage = baseurl.slice(0,7) + "/" + i;
+				var nextpage = nextpage.replace(/\,/g,"/");
+				
+				//console.log(nextpage);
+
+	
+			
+				GM_xmlhttpRequest({
+				method: "GET",
+				url: nextpage,
+				onload: function(response) {
+						//console.log(response.responseText);
+	
+						if ( response.responseText.indexOf('id="manga-page"') > 0 ) {
+							var raw = response.responseText;
+							var content = /<img.*manga-page.*>/.exec(raw)
+							//console.log(content);
+							var imglink = /"http.*(png|jpg)"/.exec(content);
+							console.log(imglink[0]);
+				
+				
+							var pagenum = /\d*..?(png|jpg)/.exec(imglink[0]);
+							console.log(pagenum[0]);
+							var newpageanchor= '<a href=' + imglink[0] + 'id="page' +
+																	/\d*.?/.exec(pagenum[0]) + '">\n' +
+																	"\t" + pagenum[0] + "<br />" +
+																	'</a>';
+				
+						}
+			
+						else {
+							imglink[0] = "image not found!";
+							var newpageanchor='<a href="#" class="404">Uh-oh.something went wrong</a>' +
+					                          '<br />';
+						}
+			
+						$("#dlinks").append(newpageanchor);
+			
+						//sort links
+						$('#dlinks a[id^="page"]').sort(function (a, b) {
+						var re = /[^\d]/g;
+						return ~~a.id.replace(re, '') > ~~b.id.replace(re, '');
+						})
+						.appendTo("#dlinks");
+			
+
+					}
+				
+				});
+				
+		
+			};
+
+		$("#dlloading").remove();
+
+    });
 
 });

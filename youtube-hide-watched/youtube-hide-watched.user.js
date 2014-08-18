@@ -6,8 +6,8 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2014, Joost Bremmer
 // @license        MIT
-// @version        1.1.1
-// @date           04-08-2014  
+// @version        1.1.2
+// @date           18-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @downloadURL    https://rawgit.com/ToostInc/userscripts/master/youtube-hide-watched/youtube-hide-watched.user.js
 // @updateURL      https://rawgit.com/ToostInc/userscripts/master/youtube-hide-watched/youtube-hide-watched.meta.js
@@ -39,7 +39,7 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 $(document).ready (function () {
-	
+  //Add mutation observer, checks for changes in DOM
   if (MutationObserver) {
 	  var myObserver  = new MutationObserver(hideWatched);
 	}
@@ -62,22 +62,21 @@ $(document).ready (function () {
 								  "vertical-align" : "middle",
 								  "text-align" : "center"
 								});
-	
+	//checkbox event
 	$("#hide-videos").change(function() {
 		if ( $(this).is(":not(:checked)") ) {
 			showWatched();
 		}
-	  
+
 		else {
 			hideWatched();
 		};
-		
+
 	});
-	
-	
+
 	//BONUS: always enable load more button.
 	$("button.load-more-button").removeProp("disabled");
-	
+
 	hideWatched();
 
 
@@ -85,11 +84,11 @@ $(document).ready (function () {
 
 
 function hideWatched () {
-	
+
 	if ( $("#hide-videos").is(":checked") ) {
 			$("div.watched-badge").each(function() {
 	      $(this).closest("li.feed-item-container").hide("200");
-		
+
 	    });
 
 	}
@@ -97,7 +96,7 @@ function hideWatched () {
 
 function showWatched() {
 		  $("div.watched-badge").each(function() {
-	      $(this).closest("li.feed-item-container").show("300");
-		
-	  });
+			$(this).closest("li.feed-item-container").show("300");
+
+	});
 }

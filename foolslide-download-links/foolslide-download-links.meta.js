@@ -7,7 +7,7 @@
 // @copyright    2014, Joost Bremmer
 // @license      MIT
 // @version      1.0
-// @date           04-08-2014  
+// @date         18-08-2014
 // @require      http://code.jquery.com/jquery-latest.min.js
 // @grant        none
 // @downloadURL  https://rawgit.com/ToostInc/userscripts/master/foolslide-download-links/foolslide-download-links.user.js

@@ -6,13 +6,13 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2014, Joost Bremmer
 // @license        MIT
-// @version        2.0
-// @date           06-08-2014
+// @version        2.1.1
+// @date           18-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_addStyle
 // @grant          GM_xmlhttpRequest
 // @downloadURL    https://rawgit.com/ToostInc/userscripts/master/batoto-direct-links/batoto_direct_links.user.js
-// @updateURL      https://rawgit.com/ToostInc/userscripts/master/batoto-direct-links/batoto_direct_links.meta.js 
+// @updateURL      https://rawgit.com/ToostInc/userscripts/master/batoto-direct-links/batoto_direct_links.meta.js
 // ==/UserScript==
 
 
@@ -41,9 +41,9 @@
 //
 
 $(document).ready (function () {
-	
-	
-	
+
+
+
 
 	//Add various tabs
 	var dlinks       = "<div id='dlinks' class='rounded dlinks'>\n" +
@@ -55,12 +55,12 @@ $(document).ready (function () {
 					          "Direct Links" +
 					       "</button>\n" +
 					   "</li>";
-	
-	
+
+
 	//insert tabs
 	$("#read_settings").before(dlinks);
 	$("div.moderation_bar li:last-child").before(dlinksanchor);
-	
+
 	//style tabs
 
 	GM_addStyle(".dlinks {" +
@@ -70,7 +70,7 @@ $(document).ready (function () {
 							  "display: none;" +
 							  "text-align: center;" +
 							  "border-top: 1px solid #CDCDCD;" +
-							  "border-top-right-radius:0px;"+ 
+							  "border-top-right-radius:0px;"+
 							  "border-top-left-radius: 0px;" +
 							  "border-bottom: 1px solid #CDCDCD;"+
 							  "z-index: 999; position: absolute;" +
@@ -79,19 +79,18 @@ $(document).ready (function () {
 							"}"
 						 );
 	$("#comic_wrap").css("z-index","499")
-	
 
-	
+
+
 
 	//get image source
 	var imgsrc = $("img#comic_page").attr("src");
-	var imgsrc = imgsrc.split("/");
-		
+
 	//get total amount of pages
 	var pages  = $("select#page_select option:last").html();
 	var pages = pages.replace(/page./g, '');
-		
-		
+
+
 	//insert links into Direct Links div.
 	var dlmesg = '<p>\n' +
 	                '\tUse "Right-click > Save As" dialogue,' +
@@ -102,71 +101,71 @@ $(document).ready (function () {
 			          'to save the images.\n' +
 				  '<br /><br />' +
 	              '</p>\n' +
-				  '<a href="#" id="dlloading">' + 
-				  	'\tLoading...'+
-				  	'\t<br />\n' +
+				  '<a href="#" id="dlloading">' +
+					'\tLoading...'+
+					'\t<br />\n' +
 				  '</a>';
-	
+
 	$("#dlinks").append(dlmesg);
 
 	//event handler click on 'Direct Links' button.
 	$("#dlinksanchor").click( function() {
-	
+
 		$("#dlinks").slideToggle("slow");
-				
+
 	});
-	
+
 	$("#page_select:first > option").each(function() {
-  	var nextpage = $(this).attr("value");  	
+	var nextpage = $(this).attr("value");
 		//console.log(nextpage);
 
-		GM_xmlhttpRequest({
-  	method: "GET",
-  	url: nextpage,
-  	onload: function(response) {
+	GM_xmlhttpRequest({
+	method: "GET",
+	url: nextpage,
+	onload: function(response) {
 			//console.log(response.responseText);
-	
+
 			if ( response.responseText.indexOf('id="comic_page"') > 0 ) {
 				var raw = response.responseText;
 				var content = /<img.*comic_page.*>/.exec(raw)
 				//console.log(content);
 				var imglink = /"http.*(png|jpg)"/.exec(content);
-				console.log(imglink[0]);
-				
-				
+				//console.log(imglink[0]);
+
+
 				var pagenum = /\d*\.(png|jpg)/.exec(imglink[0]);
-				console.log(pagenum[0]);
-				var newpageanchor= '<a href=' + imglink[0] + 'id="page' + 
+				//console.log(pagenum[0]);
+				var newpageanchor= '<a href=' + imglink[0] + 'id="page' +
 														/\d*/.exec(pagenum[0]) + '">\n' +
 										"\t" + pagenum[0] + "<br />" +
 								   '</a>';
-				
+
 			}
-			
+
 			else {
 				imglink[0] = "image not found!";
-				var newpageanchor='<a href="#" class="404">Uh-oh.something went wrong</a>' + 
+				var newpageanchor='<a href="#" class="404">Uh-oh.something went wrong</a>' +
 								  '<br />';
 			}
-			
+
 			$("#dlinks").append(newpageanchor);
-			
+
 			//sort links
 			$('#dlinks a[id^="page"]').sort(function (a, b) {
-    		var re = /[^\d]/g;
-    		return ~~a.id.replace(re, '') > ~~b.id.replace(re, '');
+			var re = /[^\d]/g;
+			return ~~a.id.replace(re, '') > ~~b.id.replace(re, '');
 			})
 			.appendTo("#dlinks");
-			
+
 
 		 }
 		});
-	
+
 		if ( $(this).is(":last-child") ) {
 				$("#dlloading").remove();
 		}
-		
-		
+
+
 	});
 
 
