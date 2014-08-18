@@ -7,7 +7,7 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2010+, Joost Bremmer
 // @license        MIT
-// @version        3.0.1
+// @version        3.0.2
 // @date           18-08-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_xmlhttpRequest
@@ -53,8 +53,7 @@ $(document).ready (function () {
 	var dlinks = "<div class='subnav pager' id='dlinks' style='display: none;" +
 					   "border-top: 1px solid #CDCDCD;"+
 					   "z-index: 499; left: 0px;'>"+
-				 "\n\tDirect links:" +
-				 "\n\t<br />"+
+				 "\n\t<h2>Direct links:</h2>" +
 				 "</div>"
 	$("ul.pager").after(dlinks);
 
@@ -80,7 +79,6 @@ $(document).ready (function () {
 					    'DownThemAll'+
 					  '</a> ' +
 			          'to save the images.\n' +
-				  '<br /><br />' +
 	              '</p>\n' +
 				  '<a href="#" id="dlloading">' +
 					'\tLoading...'+
@@ -203,7 +201,7 @@ $(document).ready (function () {
 				//console.log(pagenum[0]);
 				var newpageanchor= '<a href=' + imglink[0] + 'id="page' +
 								   /\d*.?/.exec(pagenum[0]) + '">\n' +
-								   "\t" + pagenum[0] + "<br />" +
+								   "\n\tPage " + parseInt(/\d*/.exec(pagenum[0]))  + "<br />" +
 								   '</a>';
 
 			}

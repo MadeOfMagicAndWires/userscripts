@@ -12,7 +12,7 @@ CHANGELOG
  * [Youtube Hide Watched](#youtube-hide-watched)
  * [update-metablocks](#update-metablocks)
 
-##  
+##&nbsp;
 
 
 <h3 id="batoto-download-links">
@@ -32,6 +32,9 @@ CHANGELOG
  * Disabled noisy console logging.
  * Fixed outdated version number.
 
+######Version 2.1.2
+ * Prettier Direct Link formatting
+
 <h3 id="casanova-download-links">
 	<a href="casanova-direct-links/casanova.user.js">Casanova Direct Links</a>
 </h3>
@@ -49,8 +52,11 @@ CHANGELOG
  * Cleanup leftover code
 
 
+######Version 1.3.2
+ * Change Direct Link Numbers to match the navigation.
+
 <h3 id="foolslide-download-links">
-        <a href="foolslide-download-links/foolslide-download-links.user.js">FoOlslide Download Links</a>
+	<a href="foolslide-download-links/foolslide-download-links.user.js">FoOlslide Download Links</a>
 </h3>
 
 #####Version 1.0
@@ -69,6 +75,10 @@ CHANGELOG
 
 ######Version 3.0.1
  * Fixed multiple versions of the same link being added every time the Direct Links button was clicked.
+
+######Version 3.0.2
+ * Prettier Direct Link formatting
+
 
 <h3 id="myanimelist-hover-info">
 	<a href="myanimelist-hover-info/myanimelist-hover-info.user.js">MyAnimeList Hover Info</a>
@@ -118,3 +128,6 @@ CHANGELOG
 
 ######Version 1.2.1
  * Fixed trailing whitespace insertion
+
+######Version 1.2.2
+ * Silence egrep error messages (to avoid 'input file x is also the output' messages). 

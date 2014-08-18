@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PROGRAM='update-metablocks';
-VERSION='1.2.1';
+VERSION='1.2.2';
 
 LICENCE='
 The MIT License (MIT)
@@ -78,7 +78,7 @@ writeoutput () {
 			sed -i -r "/\@version/a // @date           $DATE \ " "${INPUTFILE}";
 		fi
 		
-		egrep -B 100 "==/UserScript=="  ${INPUTFILE} > ${OUTPUTFILE};
+		egrep -B 100 "==/UserScript=="  ${INPUTFILE} > ${OUTPUTFILE} 2>/dev/null;
 	fi
 		
 }
