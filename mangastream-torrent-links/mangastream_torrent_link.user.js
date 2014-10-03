@@ -7,8 +7,8 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2010+, Joost Bremmer
 // @license        MIT
-// @version        3.0.2
-// @date           18-08-2014
+// @version        3.0.4
+// @date           03-10-2014
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_xmlhttpRequest
 // @downloadURL    https://rawgit.com/ToostInc/userscripts/master/mangastream-torrent-links/mangastream_torrent_link.user.js
@@ -50,7 +50,8 @@ $(document).ready (function () {
 	$("#Torrentsbtn").after(dlinksanchor);
 
 		//Direct Links
-	var dlinks = "<div class='subnav pager' id='dlinks' style='display: none;" +
+	var dlinks = "<div class='subnav pager' id='dlinks'"+
+					   "style='display: none;" +
 					   "border-top: 1px solid #CDCDCD;"+
 					   "z-index: 499; left: 0px;'>"+
 				 "\n\t<h2>Direct links:</h2>" +
@@ -58,7 +59,9 @@ $(document).ready (function () {
 	$("ul.pager").after(dlinks);
 
 	var torrents = '<div class="subnav pager" id="results"'+
-						'style="display: none; border-top: 1px solid #CDCDCD; left: 0px;' +
+						'style="display: none;'+
+						'border-top: 1px solid #CDCDCD;'+
+						'left: 0px;' +
 						'padding-bottom: 05px;">' +
 				   '\n\t<h2>Torrent:</h2>' +
 				   '\n\t<span id="torrentlink">Searching...</span>' +
@@ -87,6 +90,15 @@ $(document).ready (function () {
 
 	$("#dlinks").append(dlmesg);
 
+	var dlinksdiv = '<div id="dlinkscontainer"'+
+							'style="text-align: left;'+
+							'position: relative;'+
+							'left: 48%;'+
+							'min-width: 70px;">' +
+					'</div>'
+
+	$("#dlinks").append(dlinksdiv);
+
 
 
 	//Function for clicking Torrents
@@ -104,7 +116,7 @@ $(document).ready (function () {
 		var query = query.replace(/\s/g,"+");
 
 		var url = "http://www.nyaa.eu/?page=search&term="+query+
-		          "&cat=0&listorder=1&page=search&sort=1"
+		          "&sort=2"
 
 		//console.log(url);
 
@@ -197,11 +209,11 @@ $(document).ready (function () {
 				//console.log(imglink[0]);
 
 
-				var pagenum = /\d*..?(png|jpg)/.exec(imglink[0]);
+				var pagenum = /\d*[\-|\d]*?..?(jpg|png)/.exec(imglink[0]);
 				//console.log(pagenum[0]);
 				var newpageanchor= '<a href=' + imglink[0] + 'id="page' +
-								   /\d*.?/.exec(pagenum[0]) + '">\n' +
-								   "\n\tPage " + parseInt(/\d*/.exec(pagenum[0]))  + "<br />" +
+								   /^\d*[A-z]?/.exec(pagenum[0]) + '">\n' +
+								   "\n\tPage " + /^\d*\-?\d{2}[A-z]?/.exec(pagenum[0])  + "<br />" +
 								   '</a>';
 
 			}
@@ -213,14 +225,14 @@ $(document).ready (function () {
 				                  '<br />';
 			}
 
-			$("#dlinks").append(newpageanchor);
+			$("#dlinkscontainer").append(newpageanchor);
 
 			//sort links
 			$('#dlinks a[id^="page"]').sort(function (a, b) {
-				var re = /[^\d]/g;
+				var re = /page/g;
 				return ~~a.id.replace(re, '') > ~~b.id.replace(re, '');
 			})
-			.appendTo("#dlinks");
+			.appendTo("#dlinkscontainer");
 
 
 		 }

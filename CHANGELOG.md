@@ -79,6 +79,11 @@ CHANGELOG
 ######Version 3.0.2
  * Prettier Direct Link formatting
 
+######Version 3.0.3
+ * Improved Regex for pagenumbers
+
+######Version 3.0.4
+ * Fixed getting the most seeded torrent.
 
 <h3 id="myanimelist-hover-info">
 	<a href="myanimelist-hover-info/myanimelist-hover-info.user.js">MyAnimeList Hover Info</a>
