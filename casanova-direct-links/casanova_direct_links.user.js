@@ -6,8 +6,8 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2014, Joost Bremmer
 // @license        MIT
-// @version        1.3.2
-// @date           18-08-2014
+// @version        1.3.3
+// @date           08-01-2015
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @grant          GM_addStyle
 // @grant          GM_xmlhttpRequest
@@ -133,7 +133,7 @@ $(document).ready (function () {
 				//console.log(pagenum[0]);
 				var newpageanchor= '<a href=' + imglink[0] + 'id="page' +
 														/\d{2}/.exec(pagenum[0]) + '">' +
-										"\n\tPage " + (parseInt(/\d*/.exec(pagenum[0])) + 1) + "<br />" +
+										"\n\tPage " + (parseInt(/\d*/.exec(pagenum[0]))) + "<br />" +
 								   '</a>';
 
 			}

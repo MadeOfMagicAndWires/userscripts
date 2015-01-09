@@ -54,6 +54,9 @@ CHANGELOG
 
 ######Version 1.3.2
  * Change Direct Link Numbers to match the navigation.
+ 
+######Version 1.3.3
+ * Change Direct Link Numers (again).
 
 <h3 id="foolslide-download-links">
 	<a href="foolslide-download-links/foolslide-download-links.user.js">FoOlslide Download Links</a>
