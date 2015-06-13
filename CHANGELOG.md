@@ -119,6 +119,9 @@ CHANGELOG
 ######Version 1.1.2
  * extra comments
 
+######Version 1.1.3
+ * Youtube changed classes used as identifiers in hideWatched() and howWatched()
+
 <h3 id="update-metablocks">
 	<a href="youtube-hide-watched/youtube-hide-watched.user.js">update-metablocks</a>
 </h3>
@@ -139,3 +142,6 @@ CHANGELOG
 
 ######Version 1.2.2
  * Silence egrep error messages (to avoid 'input file x is also the output' messages). 
+
+######Version 1.2.3
+ * Edit Help message to align right border with longer version numbers

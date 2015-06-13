@@ -6,8 +6,8 @@
 // @author         Joost Bremmer < toost dot b at gmail dot com >
 // @copyright      2014, Joost Bremmer
 // @license        MIT
-// @version        1.1.2
-// @date           18-08-2014
+// @version        1.1.3
+// @date           13-06-2015
 // @require        http://code.jquery.com/jquery-latest.min.js
 // @downloadURL    https://rawgit.com/ToostInc/userscripts/master/youtube-hide-watched/youtube-hide-watched.user.js
 // @updateURL      https://rawgit.com/ToostInc/userscripts/master/youtube-hide-watched/youtube-hide-watched.meta.js
@@ -87,7 +87,7 @@ function hideWatched () {
 
 	if ( $("#hide-videos").is(":checked") ) {
 			$("div.watched-badge").each(function() {
-	      $(this).closest("li.feed-item-container").hide("200");
+	      $(this).closest("ol.item-section").hide("200");
 
 	    });
 
@@ -96,7 +96,7 @@ function hideWatched () {
 
 function showWatched() {
 		  $("div.watched-badge").each(function() {
-			$(this).closest("li.feed-item-container").show("300");
+			$(this).closest("ol.item-section").show("300");
 
 	});
 }

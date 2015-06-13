@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PROGRAM='update-metablocks';
-VERSION='1.2.2';
+VERSION='1.2.3';
 
 LICENCE='
 The MIT License (MIT)
@@ -30,7 +30,7 @@ SOFTWARE.
 HELPMSG="
 ###################################################################
 ##                                                               ##
-## ${PROGRAM} ${VERSION}:                                        ##
+## ${PROGRAM} ${VERSION}:                                      ##
 ##                                                               ##
 ## writes userscript metablock data to *.meta.js files.          ##
 ##                                                               ##
