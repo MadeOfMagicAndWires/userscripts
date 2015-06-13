@@ -1,4 +1,9 @@
-spawncamping-bears
+userscript hooks
 ==================
 
-Userscripts I made over the years, and used to be up on userscripts.org
+These are some hooks that make updating the userscripts a bit less of a chore
+
+###Installation
+
+Simply run install-hooks from this directory, which will symlink all hooks to .git/hooks
+

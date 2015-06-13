@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+## Check commit for userscripts and run update-metablocks
+
+for path in $(git diff --name-only --cached); do
+	if [[ $path =~ ./*user.js$ ]]; then
+		echo -e "\033[0;32m *** Generating Meta-file *** \033[0m"
+		
+		(echo "$GIT_DIR" && ./update-metablocks -w $path) 
+		git add -v $path ${path%user.js}meta.js
+	fi
+done

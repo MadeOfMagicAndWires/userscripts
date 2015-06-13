@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "Adding hooks"
+
+shopt -s nullglob
+for hook in *.hook; do
+	ln -svf "$(pwd)/${hook}" ".git/hooks/${hook%.hook}"
+done
