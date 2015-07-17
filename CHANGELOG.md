@@ -35,6 +35,9 @@ CHANGELOG
 ######Version 2.1.2
  * Prettier Direct Link formatting
 
+######Version 2.1.3
+ * Added bato.to to include rules
+
 <h3 id="casanova-download-links">
 	<a href="casanova-direct-links/casanova.user.js">Casanova Direct Links</a>
 </h3>
