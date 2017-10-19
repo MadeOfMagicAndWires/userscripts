@@ -7,8 +7,11 @@
 // @copyright      2014, Joost Bremmer
 // @license        MIT
 // @version        1.1.3
-// @date           15-10-2017
-// @downloadURL    https://rawgit.com/ToostInc/userscripts/master/youtube-hide-watched/youtube-hide-watched.user.js
-// @updateURL      https://rawgit.com/ToostInc/userscripts/master/youtube-hide-watched/youtube-hide-watched.meta.js
+// @date           19-10-2017
+// @downloadURL
+// https://rawgit.com/ToostInc/userscripts/master/youtube-hide-watched/youtube-hide-watched.user.js
+// @updateURL
+// https://rawgit.com/ToostInc/userscripts/master/youtube-hide-watched/youtube-hide-watched.meta.js
 // @grant          none
+// @runat          document-end
 // ==/UserScript==
