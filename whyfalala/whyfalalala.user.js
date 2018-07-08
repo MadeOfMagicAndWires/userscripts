@@ -6,10 +6,12 @@
 // @author         Joost Bremmer < contact@madeofmagicandwires.online >
 // @copyright      2018, Joost Bremmer
 // @license        MIT
-// @version       `0.1
+// @version       `0.2
 // @date           2108-07-07
 // @require        https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js
 // ==/UserScript==
+
+const groupName = 'whyfalalala';
 
 async function getImageBlob(url){
   return fetch(`https://cors-anywhere.herokuapp.com/${url}`).then(function (response) {
@@ -17,42 +19,58 @@ async function getImageBlob(url){
   });
 }
 
+function madokamiFileName(chapter,groupName){
+  let chapterInfo = chapter.title.split(/(^.*?)\s?((volume|v)\s?\d{1,2})?\s?((chapter|ch|c)?\s?\d{1,}\-?\d{1,})/gi);
+  chapterInfo = chapterInfo.splice(1, chapterInfo.length - 2);
 
-async function getChapterInfo(article){
-  let chapter = {};
+  let seriesTitle = chapterInfo[0];
+  let volumeNo = (chapterInfo[1]) ? chapterInfo[1] : '';
+  let chapterNo = (chapterInfo[3]) ? chapterInfo[3] : '';
 
-  if (article.classList.contains("tag-scanlation")) {
-    chapter.title = article.getElementsByTagName("h1")[0].innerText;
+  volumeNo = volumeNo.replace(/(volume|vol)\s?/i, '');
+  chapterNo = chapterNo.replace(/(chapter|ch|c)\s?/i, '');
 
-    if (article.getElementsByClassName("tiled-gallery").length > 0) {
-      chapter.images = [];
-      let images = Array.from(article.getElementsByTagName("img"));
-      for (let img of images) {
-        let chapImg = {};
+  // More manipulation requred for volume no. as its optional
+  if (volumeNo.length < 2 && !volumeNo === ''){ volumeNo = `0${volumeNo}`; } // nullpad
+  if (volumeNo !== '') { volumeNo = `(v${volumeNo})`; } // output: '(v??)'
 
-        chapImg.url = img.dataset.origFile;
-        chapImg.fileName = `${img.dataset.imageTitle}.${chapImg.url.match(/(\w{3,4})$/g)[0]}`;
-        chapter.images.push(chapImg);
-      }
-    } else {
-      chapter.images = null;
-    }
-    return chapter;
-  } else {
-    return null;
-  }
+  // Example output: 'Giant Killing - c001 (v01) [groupName]'
+  let madokamiStr = `${seriesTitle} - c${chapterNo} ${volumeNo}[${groupName}]`;
+
+  return madokamiStr;
 }
 
-//See https://codeburst.io/javascript-async-await-with-foreach-b6ba62bbf404
+
+function getChapterInfo(post){
+  let chapter = {};
+
+  chapter.title = post.getElementsByTagName("h1")[0].innerText;
+  chapter.fileName = madokamiFileName(chapter, groupName);
+
+  if (post.getElementsByClassName("tiled-gallery").length > 0) {
+    chapter.images = [];
+    let images = Array.from(post.getElementsByTagName("img"));
+    for (let img of images) {
+      let chapImg = {};
+
+      chapImg.url = img.dataset.origFile;
+      chapImg.fileName = `${img.dataset.imageTitle}.${chapImg.url.match(/(\w{3,4})$/g)[0]}`;
+      chapter.images.push(chapImg);
+    }
+  } else {
+    chapter.images = null;
+  }
+  return chapter;
+}
+
+// See https://codeburst.io/javascript-async-await-with-foreach-b6ba62bbf404
 async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array)
   }
 }
 
-
-
-function createElements(article) {
+function createElements(post) {
   let container = document.createElement("div");
   let textArea = document.createElement("textarea");
   let downloadButton = document.createElement("a");
@@ -61,18 +79,29 @@ function createElements(article) {
   container.classList.add("container");
   textArea.value = "Loading...";
   downloadButton.innerText = "Loading...";
+  downloadButton.style = `
+    margin: 5px 0;
+    display: inline-block;
+    background: #f8f8f8;
+    padding: 5px 4px;
+    border-radius: 5px;
+    text-decoration: none;
+    border-color: #bbb;
+    border-width: 1px;
+    border-style: solid;
+  `;
 
   container.appendChild(textArea);
   container.appendChild(downloadButton);
-  if (article.getElementsByClassName("entry-summary").length > 0) {
-    article.getElementsByClassName("entry-summary")[0].appendChild(container);
+
+  // append to entry-summary for blogroll or entry-content for specific post
+  if (post.getElementsByClassName("entry-summary").length > 0) {
+    post.getElementsByClassName("entry-summary")[0].appendChild(container);
   } else {
-    article.getElementsByClassName("entry-content")[0].appendChild(container);
+    post.getElementsByClassName("entry-content")[0].appendChild(container);
   }
 
-
   return container;
-
 }
 
 function createFile(anchor, data, filename) {
@@ -96,29 +125,44 @@ async function createZip(chapter) {
 
 let chapters = [];
 
-async function start() {
-  console.log("Start!");
+/*
+* Blog specific stuff starts here.
+*/
 
-  let articles = document.getElementsByTagName("article");
-
-  await asyncForEach(articles, async (article) => {
-    chapter = await getChapterInfo(article);
-    if (chapter !== null && chapter.images !== null) {
-      chapters.push(chapter);
-
-      let container = createElements(article);
-      let textArea = container.children[0];
-
-      container.id = `chapter_${chapter.title.replace(' ', '_')}`;
-
-      imageUrls = chapter.images.map((img) => img.url);
-      textArea.value = imageUrls.join("\n");
-
-      let chapterZip = await createZip(chapter);
-      await createFile(container.children[1], chapterZip, `${chapter.title}.cbz`);
+async function getChapters() {
+  let chapterElements = Array.prototype.filter.call(document.getElementsByTagName("article"), (article) => {
+    if (article.classList.contains("tag-translation")) {
+      return true;
     }
+    return false;
 
   });
+
+  let statusCode = await asyncForEach(chapterElements, async (article) => {
+      chapter = getChapterInfo(article);
+      if (chapter !== null && chapter.images !== null) {
+        console.log(`Found ${chapter.title}`);
+        chapters.push(chapter);
+
+        let container = createElements(article);
+        let textArea = container.children[0];
+
+        container.id = `chapter_${chapter.title.replace(' ', '_')}`;
+
+        imageUrls = chapter.images.map((img) => img.url);
+        textArea.value = imageUrls.join("\n");
+
+        let chapterZip = await createZip(chapter);
+        await createFile(container.children[1], chapterZip, `${chapter.fileName}.cbz`);
+        return 0;
+      } else { return -1; }
+    return statusCode;
+  });
+}
+
+async function start() {
+  console.log("Start!");
+  await getChapters();
   return 0;
 }
 
