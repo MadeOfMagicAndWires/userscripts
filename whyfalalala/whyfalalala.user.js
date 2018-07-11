@@ -6,13 +6,15 @@
 // @author         Joost Bremmer < contact@madeofmagicandwires.online >
 // @copyright      2018, Joost Bremmer
 // @license        MIT
-// @version        0.3
+// @version        1.0
 // @date           2018-07-11
 // @require        https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js
 // ==/UserScript==
 
 /**
- * @fileOverview A userscript to download (manga) chapters from WordPress based galleries
+ * @file A userscript to download (manga) chapters from WordPress based galleries.
+ *
+ *       It adds a download link at the end of every post where you can download a zip file containing all the images.
  * @name whyfalalala
  */
 

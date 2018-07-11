@@ -6,7 +6,7 @@
 // @author         Joost Bremmer < contact@madeofmagicandwires.online >
 // @copyright      2018, Joost Bremmer
 // @license        MIT
-// @version        0.3
+// @version        1.0
 // @date           2018-07-11
 // @require        https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js
 // ==/UserScript==
