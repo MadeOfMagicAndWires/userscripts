@@ -85,3 +85,4 @@ parserOptions:
   forOf: true
   spread: true
   templateStrings: true
+  ecmaVersion: 2017
