@@ -30,7 +30,7 @@ SOFTWARE.
 HELPMSG="
 ###################################################################
 ##                                                               ##
-## ${PROGRAM} ${VERSION}:                                      ##
+## ${PROGRAM} ${VERSION}:                                        ##
 ##                                                               ##
 ## writes userscript metablock data to *.meta.js files.          ##
 ##                                                               ##
@@ -56,12 +56,12 @@ DRYRUN=true;
 INPUTFILE="";
 OUTPUTFILE="";
 OUTPUTFILEBOOL=false;
-DATE=`date +%d-%m-%Y`;
+DATE=`date --iso-8601=date`;
 
 writeoutput () {
 	if $DRYRUN; then
 	 	if [[ $(egrep "\@date" ${INPUTFILE}) ]]; then
-			cat ${INPUTFILE} | sed -r "s/[0-9]{2}\-[0-9]{2}\-[0-9]{4}/$DATE/"| \
+			cat ${INPUTFILE} | sed -r "s/[0-9]{2,4}\\-[0-9]{2,4}\\-[0-9]{2,4}/$DATE/"| \
 			egrep -B 100 "==/UserScript==" ;
 			echo "";
 		else
@@ -73,7 +73,7 @@ writeoutput () {
 		echo "Writing metablock from \"${INPUTFILE}\" into \"${OUTPUTFILE}\"";
 
         if [[ $(egrep "\@date" ${INPUTFILE}) ]]; then
-			sed -i -r "s/[0-9]{2}\-[0-9]{2}\-[0-9]{4}/$DATE/" "${INPUTFILE}";
+            sed -i -r "s/[0-9]{2,4}\\-[0-9]{2,4}\\-[0-9]{2,4}/$DATE/" "${INPUTFILE}";
 		else
 			sed -i -r "/\@version/a // @date           $DATE \ " "${INPUTFILE}";
 		fi
