@@ -2,12 +2,12 @@
 // @name           Whyfalalala download WordPress gallery images
 // @namespace      https://github.com/ToostInc/userscripts
 // @description    Adds download links to posts containing a gallery
-// @include        https://whyfalalala.wordpress.com/*
+// @include        /^https:\/\/whyfalalala\.wordpress\.com\/(\d{4}\/\d{2}\/\d{2}\/\S*\/(\#more-\d{4})?)?$/
 // @author         Joost Bremmer < contact@madeofmagicandwires.online >
 // @copyright      2018, Joost Bremmer
 // @license        MIT
 // @version        0.3
-// @date           2108-07-07
+// @date           2018-07-11
 // @require        https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js
 // ==/UserScript==
 
