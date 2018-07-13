@@ -6,7 +6,7 @@
 // @author         Joost Bremmer < contact@madeofmagicandwires.online >
 // @copyright      2018, Joost Bremmer
 // @license        MIT
-// @version        1.2
+// @version        1.3
 // @date           2018-07-13
 // @require        https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js
 // ==/UserScript==
@@ -370,29 +370,19 @@ async function createZip(chapter) {
 
 let chapters = [];
 
-/******************************************************************************
-* Blog specific stuff starts here.
-*
-*******************************************************************************/
 
 /**
  * Creates {Chapter} objects from all matching posts on a page and appends Zips to them
  *
  * @function getChapters
  * @async
- * @param {Node} [element=document] - element to search for WordPress posts
+ * @param {HTMLCollection} chapterElements - element to search for WordPress posts
  * @returns {Number} - returns zero if all went well or -1 if something went wrong.
  */
-async function getChapters(element=document) {
-  let chapterElements = Array.prototype.filter.call(element.getElementsByTagName("article"), (article) => {
-    if (article.classList.contains("tag-translation")) {
-      return true;
-    }
-    return false;
-  });
+async function getChapters(chapterElements) {
 
-  await asyncForEach(chapterElements, async (article) => {
-    let chapter = new Chapter(article);
+  await asyncForEach(chapterElements, async (chapterElement) => {
+    let chapter = new Chapter(chapterElement);
 
     if (chapter !== undefined && chapter.images !== null) {
       console.log(`Found ${chapter.title}`);
@@ -415,19 +405,30 @@ async function getChapters(element=document) {
         container.children[2].download = `${chapter.fileName}.cbz`;
       });
 
-
       return 0;
     } else { return -1; }
   });
 }
 
+/******************************************************************************
+* Blog specific stuff starts here.
+*
+*******************************************************************************/
+
 /**
- * initiates script.
+ * Blog specific function that initiates the script
  * @returns {void}
  */
 async function start() {
   console.log("Start!");
-  await getChapters();
+  let chapterElements = Array.prototype.filter.call(document.getElementsByTagName("article"), (article) => {
+    if (article.classList.contains("tag-translation")) {
+      return true;
+    }
+    return false;
+  });
+
+  await getChapters(chapterElements);
 }
 
 start();
