@@ -7,6 +7,6 @@
 // @copyright      2018, Joost Bremmer
 // @license        MIT
 // @version        1.3
-// @date           2018-07-13
+// @date           2018-07-17
 // @require        https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js
 // ==/UserScript==

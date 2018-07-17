@@ -7,7 +7,7 @@
 // @copyright      2018, Joost Bremmer
 // @license        MIT
 // @version        1.3
-// @date           2018-07-13
+// @date           2018-07-17
 // @require        https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js
 // ==/UserScript==
 
@@ -415,18 +415,30 @@ async function getChapters(chapterElements) {
 *
 *******************************************************************************/
 
+async function filterPosts(elements) {
+  return new Promise((resolve, reject) => {
+    let chapterElements = Array.prototype.filter.call(elements, (element) => {
+      if (element.classList.contains("tag-translation")) {
+        return true;
+      }
+      return false;
+    });
+
+    if (chapterElements.length > 0) {
+      resolve(chapterElements);
+    } else {
+      reject(null);
+    }
+  });
+}
+
 /**
  * Blog specific function that initiates the script
  * @returns {void}
  */
 async function start() {
   console.log("Start!");
-  let chapterElements = Array.prototype.filter.call(document.getElementsByTagName("article"), (article) => {
-    if (article.classList.contains("tag-translation")) {
-      return true;
-    }
-    return false;
-  });
+  let chapterElements = await filterPosts(document.getElementsByTagName("article"));
 
   await getChapters(chapterElements);
 }
