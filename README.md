@@ -2,57 +2,56 @@ userscripts
 ==================
 
 These are some userscripts I made over the years,
-some of which used to be up on userscripts.org  
+some of which used to be up on userscripts.org
 
 Most of them help with downloading manga/comic chapters from online readers,
 as I prefer offline readers like [MComix](http://sourceforge.net/projects/mcomix/).
 
 
-Index
+Contents
 -----
- * [Batoto Download Links](#batoto-download-links)
- * [Casanova Download Links](#casanova-download-)
- * [Foolslide Download Links](#foolslide-download-links)
- * [MangaStream Torrent Links](#mangastream-torrent-links)
- * [MyAnimeList Hover Info](#myanimelist-hover-info)
- * [Patreon Creator Activity Only](#patreon-creator-activity-only)
- * [Youtube Hide Watched](#youtube-hide-watched)
  * [update-metablocks](#update-metablocks)
+ * [Mangadex Fullscreen Reader](#mangadex-fullscreen-reader)
+ * [Mangadex Toggle Tags](#mangadex-toggle-tags)
+ * [Youtube Hide Watched](#youtube-hide-watched)
+ * [Foolslide Download Links](#foolslide-download-links)
+ * [Patreon Creator Activity Only](#patreon-creator-activity-only) (probably out of date)
+ * [MangaStream Torrent Links](#mangastream-torrent-links) (out of date)
+ * [MyAnimeList Hover Info](#myanimelist-hover-info) (out of date)
+ * ~~Batoto Download Links~~ (decaprecated)
+ * ~~Casanova Download Links~~ (decaprecated)
+ * ~~whyfalala~~ (decaprecated)
 
 
 
-<h2 id="batoto-download-links">
-	<a href="batoto-direct-links/batoto_direct_links.user.js">Batoto Direct Links</a>
+<h2 id="update-metablocks">
+	<a href="update-metablocks">update-metablocks</a>
 </h2>
 
-Adds direct links to every image when reading a chapter on [Batoto](http://http://www.batoto.net),
-so that they may be easily downloaded.
+update-metablocks is a small shell script that takes the
+```javascript
+      ==Userscript==
+      ...
+      ==/Userscript==
+```
+metablocks from userscript files, and copies them into *.meta.js files.
 
+It's features inclede automatic @date updating and insertion.
 
-<div class="screenshots" style="max-width: 80%" align="center">
-	<h5>Screenshots:</h5>
-	<img src="http://i.imgur.com/VXo2aAB.png" width="90%" alt="Navigation Menu" />
-    <img src="http://i.imgur.com/vs2NRDg.png" width="45%" alt="Batoto Direct Links" />
-    <img src="http://i.imgur.com/FpaIC0D.png" width="45%" alt="Batoto Clean" />
+For examples run `./update-metablocks --help` for documentation
+or `./update-metablocks */*.user.js` to do a dry run on all user.js files.
 
-</div>
+<h2 id="mangadex-fullscreen-reader">Mangadex Fullscreen Reader</h2>
 
+A Proof of Concept script I created for a [feature suggestion](https://mangadex.org/thread/68879) I made.
 
-<h2 id="casanova-download-links">
-	<a href="casanova-direct-links/casanova_direct_links.user.js">Casanova Direct Links</a>
-</h2>
+It has a lot of issues, chief of which is that vertical scrolling with the keys does not seem to work, so I haven't re-worked it as an installable userscript but it could serve as the basis of one.
 
-Adds direct links to every image when reading a chapter on [Casanovascans](http://casanovascans.com/).  
-Essentially the exact same script as Batoto Direct Links, only updated to grab all the pages using  
-**xmlhttpRequests**.
+<h2 id="mangadex-toggle-tags">Mangadex Toggle Tags</h2>
 
-<div class="screenshots" style="max-width: 80%" align="center">
-	<h5>Screenshots:</h5>
-	<img src="http://i.imgur.com/yZM4g3N.png" width="90%" alt="Navigation Menu" />
-    <img src="http://i.imgur.com/avwGbHv.png" width="45%" alt="Casanova Direct Links" />
-    <img src="http://i.imgur.com/xh6lFE1.png" width="45%" alt="Casanova Clean" />
+A script I made as a client-side implementation for [this feature request](https://mangadex.org/thread/172646).
 
-</div>
+It toggles the visibility of tags on title pages to avoid possible spoilers, with an option to show them.
 
 
 
@@ -78,8 +77,7 @@ but should work for any page you know contains links to a [FoOlslide](https://fo
 	<a href="mangastream-torrent-links/mangastream_torrent_link.user.js">Mangastream Torrent Links</a>
 </h2>
 
-Provides direct image and external download links for the the 
-[MangaStream](http://mangastream.com/) Reader.
+Provides direct image and external download links for the the [MangaStream](http://mangastream.com/) Reader.
 
  <div class="screenshots" style="max-width: 80%" align="center">
 	<h5>Screenshots:</h5>
@@ -92,8 +90,8 @@ Provides direct image and external download links for the the
 	<a href="myanimelist-hover-info/myanimelist-hover-info.user.js">MyAnimeList Hover Info</a>
 </h2>
 
-Adds hovering info boxes to links on [MyAnimeList](http://myanimelist.net) 
-similar to the ones on Top Anime/Manga pages, to normal links.  
+Adds hovering info boxes to links on [MyAnimeList](http://myanimelist.net)
+similar to the ones on Top Anime/Manga pages, to normal links.
 
 **Note**: This is a very dirty hack; it doesn't work great, and it never will.
 
@@ -131,20 +129,3 @@ A no-nonsense userscript that hides watched videos from your subscription inbox 
     <img src="http://i.imgur.com/4Y9AsDi.png" width="45%" alt="Hide Videos off" />
     <img src="http://i.imgur.com/4EuPN1x.png" width="45%" alt="Hide videos on"  />
 </div>
-
-
-<h2 id="update-metablocks">
-	<a href="update-metablocks">update-metablocks</a>
-</h2>
-
-update-metablocks is a small shell script that takes the  
-```javascript
-       ==Userscript==
-
-      ==/Userscript==
-```
-metablocks from userscript files, and copies them into *.meta.js files.  
-It's current features also inclede automatic @date updating and insertion.
-
-For examples run ```sh $ ./update-metablocks --help```;  
-or ```sh ./update-metablocks */*.user.js``` to do a dry run on all user.js files.
