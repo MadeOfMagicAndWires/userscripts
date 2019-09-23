@@ -6,7 +6,7 @@
 // @author         Joost Bremmer < contact at made of magic and wires dot online >
 // @copyright      2019, Joost Bremmer
 // @license        MIT
-// @version        0.01
+// @version        1.0.0
 // @date           2019-09-23
 // @downloadURL
 // @updateURL
@@ -49,19 +49,16 @@
  * @return {undefined}
  **/
 function toggleTags(container, visibilityOverride) {
-  console.log(container);
 
-  let toggleBtn = document.getElementById("toggleTags");
+  let toggleBtn = container.getElementsByClassName("toggleTags")[0];
 
   if(toggleBtn) {
     let tagsVisible = visibilityOverride ? visibilityOverride : ("tagsVisible" in toggleBtn.dataset);
 
-    console.log(tagsVisible);
 
-    // loop
+    // loop tag anchors and toggle visibility state
     Array.prototype.forEach.call(container.getElementsByTagName("a"), anchor => {
       if(anchor !== toggleBtn) {
-        console.log(tagsVisible);
         anchor.style.display = tagsVisible ? "inline-block" : "none";
       } else {
         anchor.innerText = tagsVisible ? "Hide Tags" : "Show Tags";
@@ -88,14 +85,12 @@ function addToggleButton(container) {
   let toggleBtn = document.createElement("a");
 
   // set toggle button details
-  toggleBtn.id = "toggleTags";
+  toggleBtn.classList.add("toggleTags");
   toggleBtn.classList.add("badge");
   toggleBtn.style.color = "#4c5760";
   toggleBtn.style.background = "#fff";
   toggleBtn.innerText = "Show Tags";
   toggleBtn.addEventListener("click", () => {
-    console.log(("hideTags" in toggleBtn.dataset));
-
     // set visibility according to saved state
     toggleTags(container);
 
@@ -112,12 +107,17 @@ function addToggleButton(container) {
  * @return {undefined}
  **/
 function main() {
-  let container = document.querySelector("div.m-0:nth-child(5) > div:nth-child(2)");
+  let tagfields = document.querySelectorAll("a[href^='/genre']");
 
-  addToggleButton(container);
-  toggleTags(container, false);
+  let containers = new Set(Array.prototype.map.call(tagfields, (anchor) => {
+    return anchor.parentNode;
+  }));
+
+  containers.forEach((container) => {
+    addToggleButton(container);
+    toggleTags(container, false);
+  });
 }
-
-document.addEventListener("DOMContentLoaded", main);
+main();
 
 // vim: set ts=2 sts=2 sw=2 et :

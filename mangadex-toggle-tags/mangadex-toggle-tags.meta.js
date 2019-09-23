@@ -6,7 +6,7 @@
 // @author         Joost Bremmer < contact at made of magic and wires dot online >
 // @copyright      2019, Joost Bremmer
 // @license        MIT
-// @version        0.01
+// @version        1.0.0
 // @date           2019-09-23
 // @downloadURL
 // @updateURL
