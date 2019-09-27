@@ -6,7 +6,7 @@
 // @author         Joost Bremmer < contact at made of magic and wires dot online >
 // @copyright      2019, Joost Bremmer
 // @license        MIT
-// @version        1.0.2
+// @version        1.0.3
 // @date           2019-09-27
 // @downloadURL    https://github.com/MadeOfMagicAndWires/userscripts/raw/master/mangadex-toggle-tags/mangadex-toggle-tags.user.js
 // @updateURL      https://github.com/MadeOfMagicAndWires/userscripts/raw/master/mangadex-toggle-tags/mangadex-toggle-tags.user.js
@@ -88,7 +88,7 @@ function addToggleButton(container) {
   toggleBtn.classList.add("toggleTags");
   toggleBtn.classList.add("badge");
   toggleBtn.classList.add("badge-warning");
-  toggleBtn.style.min-width = 60px;
+  toggleBtn.style.min-width = "60px";
   toggleBtn.innerText = "Show Tags";
   toggleBtn.addEventListener("click", () => {
     // set visibility according to saved state
