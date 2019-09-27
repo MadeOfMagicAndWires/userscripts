@@ -6,8 +6,8 @@
 // @author         Joost Bremmer < contact at made of magic and wires dot online >
 // @copyright      2019, Joost Bremmer
 // @license        MIT
-// @version        1.0.5
-// @date           2019-09-27
+// @version        1.0.6
+// @date           2019-09-28
 // @downloadURL    https://github.com/MadeOfMagicAndWires/userscripts/raw/master/mangadex-toggle-tags/mangadex-toggle-tags.user.js
 // @updateURL      https://github.com/MadeOfMagicAndWires/userscripts/raw/master/mangadex-toggle-tags/mangadex-toggle-tags.user.js
 // @grant          none
@@ -53,16 +53,16 @@ function toggleTags(container, visibilityOverride) {
   let toggleBtn = container.getElementsByClassName("toggleTags")[0];
 
   if(toggleBtn) {
-    let hideTags = visibilityOverride ? visibilityOverride : ("hideTags" in toggleBtn.dataset);
+    let tagsVisible = visibilityOverride ? visibilityOverride : ("hideTags" in toggleBtn.dataset);
 
 
     // loop tag anchors and toggle visibility state
     Array.prototype.forEach.call(container.getElementsByTagName("a"), anchor => {
-      anchor.style.display = !hideTags ? "none" : "inline-block";
+      anchor.classList.toggle("display-none", !tagsVisible);
     });
 
     // toggle saved state
-    toggleBtn.innerText = !hideTags ? "Show Tags" : "Hide tags";
+    toggleBtn.innerText = tagsVisible ? "Hide Tags" : "Show Tags";
     if("hideTags" in toggleBtn.dataset) {
       delete toggleBtn.dataset.hideTags;
     } else {
