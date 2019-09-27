@@ -6,7 +6,7 @@
 // @author         Joost Bremmer < contact at made of magic and wires dot online >
 // @copyright      2019, Joost Bremmer
 // @license        MIT
-// @version        1.0.3
+// @version        1.0.4
 // @date           2019-09-27
 // @downloadURL    https://github.com/MadeOfMagicAndWires/userscripts/raw/master/mangadex-toggle-tags/mangadex-toggle-tags.user.js
 // @updateURL      https://github.com/MadeOfMagicAndWires/userscripts/raw/master/mangadex-toggle-tags/mangadex-toggle-tags.user.js

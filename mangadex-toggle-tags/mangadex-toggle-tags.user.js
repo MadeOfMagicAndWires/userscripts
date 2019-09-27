@@ -6,7 +6,7 @@
 // @author         Joost Bremmer < contact at made of magic and wires dot online >
 // @copyright      2019, Joost Bremmer
 // @license        MIT
-// @version        1.0.3
+// @version        1.0.4
 // @date           2019-09-27
 // @downloadURL    https://github.com/MadeOfMagicAndWires/userscripts/raw/master/mangadex-toggle-tags/mangadex-toggle-tags.user.js
 // @updateURL      https://github.com/MadeOfMagicAndWires/userscripts/raw/master/mangadex-toggle-tags/mangadex-toggle-tags.user.js
@@ -53,23 +53,20 @@ function toggleTags(container, visibilityOverride) {
   let toggleBtn = container.getElementsByClassName("toggleTags")[0];
 
   if(toggleBtn) {
-    let tagsVisible = visibilityOverride ? visibilityOverride : ("tagsVisible" in toggleBtn.dataset);
+    let hideTags = visibilityOverride ? visibilityOverride : ("hideTags" in toggleBtn.dataset);
 
 
     // loop tag anchors and toggle visibility state
     Array.prototype.forEach.call(container.getElementsByTagName("a"), anchor => {
-      if(anchor !== toggleBtn) {
-        anchor.style.display = tagsVisible ? "inline-block" : "none";
-      } else {
-        anchor.innerText = tagsVisible ? "Hide Tags" : "Show Tags";
-      }
+      anchor.style.display = !hideTags ? "none" : "inline-block";
     });
 
     // toggle saved state
-    if("tagsVisible" in toggleBtn.dataset) {
-      delete toggleBtn.dataset.tagsVisible;
+    toggleBtn.innerText = !hideTags ? "Show Tags" : "Hide tags";
+    if("hideTags" in toggleBtn.dataset) {
+      delete toggleBtn.dataset.hideTags;
     } else {
-      toggleBtn.dataset.tagsVisible = "";
+      toggleBtn.dataset.hideTags = "";
     }
   }
 }
@@ -82,13 +79,14 @@ function toggleTags(container, visibilityOverride) {
  **/
 function addToggleButton(container) {
 
-  let toggleBtn = document.createElement("a");
+  let toggleBtn = document.createElement("span");
 
   // set toggle button details
   toggleBtn.classList.add("toggleTags");
   toggleBtn.classList.add("badge");
   toggleBtn.classList.add("badge-warning");
-  toggleBtn.style.min-width = "60px";
+  toggleBtn.style.minWidth = "60px";
+  toggleBtn.style.cursor = "pointer";
   toggleBtn.innerText = "Show Tags";
   toggleBtn.addEventListener("click", () => {
     // set visibility according to saved state
