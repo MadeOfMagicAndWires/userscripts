@@ -5,17 +5,13 @@
 // @author      Travers & MadeOfMagicAndWires
 // @include     /^https:\/\/(www\.)?fallenlondon\.com\/?$/
 // @match       https://www.fallenlondon.com/
-// @version     2.0
+// @version     2.1
 // @date        2019-10-09
 // @grant       none
 // @run-at      document-start
 // ==/UserScript==
 
 "use strict";
-
-this.root = null;
-this.peeper = undefined;
-this.container = null;
 
 /**
  * Encodes strings to wikia compatible url naming scheme
@@ -54,40 +50,32 @@ function insertLink(elements) {
 }
 
 /**
- * Called by MutationObserver; finds storlet and branch elements in page and insert links into them
+ * Finds storlet and branch elements in page and tries to insert links into them
  *
- * @param {MutationRecord[]} changes DOM changes observed by MutationObserver
+ * @param {HTMLElement} container parent element containing stoylets or branch options
  * @return {undefined}
  **/
-function linkStorylets(changes) {
+function linkStorylets(container) {
+  let storylets = container.getElementsByClassName("media");
 
-  changes.forEach(change => {
-    if(change.addedNodes.length > 0 && (change.target.classList.contains("router-example") || change.target.classList.contains("tab-content__bordered-container"))) {
-      let container = change.addedNodes[0];
-      let storylets = container.getElementsByClassName("media");
+  if(storylets.length === 0) {
+    storylets = container.getElementsByClassName("media__body");
+  }
 
-      if(storylets.length === 0) {
-        storylets = container.getElementsByClassName("media__body");
-      }
+  if(storylets.length > 0) {
+    console.log(`Found ${storylets.length} storylets.`);
 
-      if(storylets.length > 0) {
-        console.log(`Found ${storylets.length} storylets.`);
-
-        // console.log("Inserting links");
-        Array.prototype.forEach.call( storylets, (storylet) => {
-          insertLink(storylet.getElementsByTagName("H1"));
-          insertLink(storylet.getElementsByTagName("H2"));
-          insertLink(storylet.getElementsByTagName("H5"));
-        });
-      }
-    }
-  });
-
+    // console.log("Inserting links");
+    Array.prototype.forEach.call( storylets, (storylet) => {
+      insertLink(storylet.getElementsByTagName("H1"));
+      insertLink(storylet.getElementsByTagName("H2"));
+      insertLink(storylet.getElementsByTagName("H5"));
+    });
+  }
 }
 
 /**
- * Finds the storylet container and resets the MutationObserver to observe that,
- * instead of the currently observed root element
+ * Observes changes for content for added children which contain storylets
  *
  * @param {MutationRecord[]} changes DOM changes to root element observed by
  *                                   MutationObserver
@@ -95,15 +83,22 @@ function linkStorylets(changes) {
  *
  * @return {undefined}
  **/
-function setMain(changes, peeper) {
+function onChangeObserved(changes, peeper) {
   changes.forEach((change) => {
+    // Node added
     if(change.type === "childList" && change.addedNodes.length > 0) {
-      let container = change.addedNodes[0];
 
-      console.log("changing observer target");
-      peeper.disconnect();
-      peeper = new MutationObserver(linkStorylets);
-      peeper.observe(container, {attributes: false, childList: true, subtree: true }, linkStorylets);
+      // root element now has tab-content; change observation target
+      if(change.target.id === "root") {
+        let container = change.addedNodes[0];
+
+        console.log("changing observer target");
+        peeper.disconnect();
+        peeper.observe(container, {attributes: false, childList: true, subtree: true }, linkStorylets);
+      } else if( change.target.classList.contains("router-example") || change.target.classList.contains("tab-content__bordered-container")) {
+        // storylet parent has been updated; try to look for Storylet elements
+        linkStorylets(change.addedNodes[0]);
+      }
     }
   });
 }
@@ -117,12 +112,12 @@ function setMain(changes, peeper) {
  **/
 function setUpObserver() {
   console.log("Setting up observer");
-  this.root = document.getElementById("root");
+  let root = document.getElementById("root");
 
-  if(this.root !== null) {
-    console.log(this.root);
-    this.peeper = new MutationObserver(setMain);
-    this.peeper.observe(this.root, {attributes: false, childList: true, subtree: false});
+  if(root !== null) {
+    let peeper = new MutationObserver(onChangeObserved);
+
+    peeper.observe(root, {attributes: false, childList: true, subtree: false});
   }
 }
 
