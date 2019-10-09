@@ -3,9 +3,9 @@
 // @namespace   fallenlondon/wiki
 // @description Adds Fallen London Archives wiki links to storylet titles and options.
 // @author      Travers & MadeOfMagicAndWires
-// @include     /^https:\/\/(www\.)?fallenlondon\.com\/?$/
+// @include     /^https:\/\/(www\.)?fallenlondon\.com(\/(login)?)?$/
 // @match       https://www.fallenlondon.com/
-// @version     2.2
+// @version     2.4
 // @date        2019-10-09
 // @grant       none
 // @run-at      document-start
@@ -123,6 +123,6 @@ function setUpObserver() {
 
 // start script as soon as the initial DOM Content has loaded.
 console.log("Start");
-document.addEventListener("DOMContentLoaded", setUpObserver);
+setUpObserver();
 
 // vim: set tw=80 ts=2 sts=2 sw=2 et :
