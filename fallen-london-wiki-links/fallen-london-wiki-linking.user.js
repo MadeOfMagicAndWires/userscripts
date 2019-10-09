@@ -5,7 +5,7 @@
 // @author      Travers & MadeOfMagicAndWires
 // @include     /^https:\/\/(www\.)?fallenlondon\.com(\/(login)?)?$/
 // @match       https://www.fallenlondon.com/
-// @version     2.4
+// @version     2.6
 // @date        2019-10-09
 // @grant       none
 // @run-at      document-start
@@ -79,23 +79,13 @@ function linkStorylets(container) {
  *
  * @param {MutationRecord[]} changes DOM changes to root element observed by
  *                                   MutationObserver
- * @param {MutationObserver} peeper  MutationObserver that observed the changes
- *
  * @return {undefined}
  **/
-function onChangeObserved(changes, peeper) {
+function onChangeObserved(changes) {
   changes.forEach((change) => {
     // Node added
     if(change.type === "childList" && change.addedNodes.length > 0) {
-
-      // root element now has tab-content; change observation target
-      if(change.target.id === "root") {
-        let container = change.addedNodes[0];
-
-        console.log("changing observer target");
-        peeper.disconnect();
-        peeper.observe(container, {attributes: false, childList: true, subtree: true }, linkStorylets);
-      } else if( change.target.classList.contains("router-example") || change.target.classList.contains("tab-content__bordered-container")) {
+      if( change.target.classList.contains("router-example") || change.target.classList.contains("tab-content__bordered-container")) {
         // storylet parent has been updated; try to look for Storylet elements
         linkStorylets(change.addedNodes[0]);
       }
@@ -117,12 +107,12 @@ function setUpObserver() {
   if(root !== null) {
     let peeper = new MutationObserver(onChangeObserved);
 
-    peeper.observe(root, {attributes: false, childList: true, subtree: false});
+    peeper.observe(root, {attributes: false, childList: true, subtree: true});
   }
 }
 
 // start script as soon as the initial DOM Content has loaded.
 console.log("Start");
-setUpObserver();
+document.addEventListener("DOMContentLoaded", setUpObserver);
 
 // vim: set tw=80 ts=2 sts=2 sw=2 et :
