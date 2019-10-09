@@ -5,7 +5,7 @@
 // @author      Travers & MadeOfMagicAndWires
 // @include     /^https:\/\/(www\.)?fallenlondon\.com\/?$/
 // @match       https://www.fallenlondon.com/
-// @version     2.1
+// @version     2.2
 // @date        2019-10-09
 // @grant       none
 // @run-at      document-start
@@ -40,7 +40,7 @@ function insertLink(elements) {
       let link = document.createElement("a");
 
       link.href = `https://fallenlondon.wikia.com/wiki/ ${encodeLink(name)}`;
-      link.style.color = "#000";
+      link.style.color = "#282520";
       link.innerText = name;
 
       header.replaceChild(link, header.childNodes[0]);
