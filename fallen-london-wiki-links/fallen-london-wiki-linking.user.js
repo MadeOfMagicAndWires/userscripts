@@ -5,13 +5,31 @@
 // @author      Travers & MadeOfMagicAndWires
 // @include     /^https:\/\/(www\.)?fallenlondon\.com(\/(login)?)?$/
 // @match       https://www.fallenlondon.com/
-// @version     2.6
-// @date        2019-10-09
+// @version     2.7
+// @date        2019-10-11
 // @grant       none
+// @grant       GM_log
+// @grant       GM_setValue
+// @grant       GM_getValue
 // @run-at      document-start
 // ==/UserScript==
 
+/* global GM_getValue, GM_log, GM_setValue */
 "use strict";
+
+/**
+ * Prints debug messages if the verbose flag is set to true
+ *
+ * @param {String} msg the message to print to the console
+ * @return {undefined}
+ */
+/* eslint-disable camelcase */
+function GM_debug(msg) {
+  if(GM_getValue("verbose", false)) {
+    GM_log(msg);
+  }
+}
+/* eslint-enable camelcase */
 
 /**
  * Encodes strings to wikia compatible url naming scheme
@@ -35,7 +53,7 @@ function insertLink(elements) {
   if (elements.length > 0) {
 
     Array.prototype.forEach.call(elements, header => {
-      // console.log( `Adding link for: ${header.innerText}`);
+      // GM_debug( `Adding link for: ${header.innerText}`);
       let name = header.innerText;
       let link = document.createElement("a");
 
@@ -63,9 +81,9 @@ function linkStorylets(container) {
   }
 
   if(storylets.length > 0) {
-    console.log(`Found ${storylets.length} storylets.`);
+    GM_debug(`Found ${storylets.length} storylets.`);
 
-    // console.log("Inserting links");
+    // GM_debug("Inserting links");
     Array.prototype.forEach.call( storylets, (storylet) => {
       insertLink(storylet.getElementsByTagName("H1"));
       insertLink(storylet.getElementsByTagName("H2"));
@@ -101,7 +119,7 @@ function onChangeObserved(changes) {
  * @return {undefined}
  **/
 function setUpObserver() {
-  console.log("Setting up observer");
+  GM_debug("Setting up observer");
   let root = document.getElementById("root");
 
   if(root !== null) {
@@ -111,8 +129,16 @@ function setUpObserver() {
   }
 }
 
+function main() {
+  GM_debug("Start");
+  if(GM_getValue("verbose") === undefined) {
+    GM_log("First run, setting up default settings");
+    GM_setValue("verbose", false);
+  }
+  setUpObserver();
+}
+
 // start script as soon as the initial DOM Content has loaded.
-console.log("Start");
-document.addEventListener("DOMContentLoaded", setUpObserver);
+document.addEventListener("DOMContentLoaded", main);
 
 // vim: set tw=80 ts=2 sts=2 sw=2 et :
