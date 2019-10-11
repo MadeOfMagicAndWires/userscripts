@@ -6,8 +6,10 @@
 // @author         Joost Bremmer < contact at made of magic and wires dot online >
 // @copyright      2019, Joost Bremmer
 // @license        MIT
-// @version        1.02
+// @version        1.1
 // @date           2019-10-11
+// @downloadURL    https://github.com/MadeOfMagicAndWires/userscripts/raw/master/fallen-london-action-counter/fallen-london-action-counter.user.js
+// @updateURL      https://github.com/MadeOfMagicAndWires/userscripts/raw/master/fallen-london-action-counter/fallen-london-action-counter.user.js
 // @grant          GM_log
 // @grant          GM_getValue
 // @grant          GM_setValue
@@ -91,7 +93,7 @@ function updateActions(newActionCount, newActionBank) {
   }
 
   // send desktop notification if the "notify" flag is set to true
-  if(actions >= actionBank) {
+  if(actions === actionBank) {
     if(GM_getValue("notify", false)) {
       GM_notification({
         title: "Fallen London Action Counter",
@@ -117,7 +119,7 @@ function getActions(changes, spy) {
   changes.forEach(change => {
     // update action counter if it is updated.
     if (change.type === "characterData" && change.target instanceof Text) {
-      updateActions(change.target.wholeText.split("/")[0]);
+      updateActions(Number(change.target.wholeText.split("/")[0]));
     } else if(change.type === "childList" && change.addedNodes.length > 0 && change.target.classList.contains("router-example")) {
       // node added
       let actionCounter = document.querySelector(".item .item__value");
@@ -129,7 +131,6 @@ function getActions(changes, spy) {
         spy.disconnect();
         spy.observe(actionCounter, {characterData: true, characterDataOldValue: true, subtree: true});
         updateActions(Number(actionSet[0]), Number(actionSet[1]));
-        actionBank = actionSet[1];
       }
     }
   });
