@@ -125,11 +125,3 @@ from a projects Activity page.
 </h2>
 
 A no-nonsense userscript that hides watched videos from your subscription inbox on [Youtube](https://www.youtube.com/feed/subscriptions).
-
-
-<div class="screenshots" style="max-width: 80%" align="center">
-    <h5>Screenshots:</h5>
-    <img src="http://i.imgur.com/1i1P5bI.png" width="90%" alt="Navigation Menu" />
-    <img src="http://i.imgur.com/4Y9AsDi.png" width="45%" alt="Hide Videos off" />
-    <img src="http://i.imgur.com/4EuPN1x.png" width="45%" alt="Hide videos on"  />
-</div>
