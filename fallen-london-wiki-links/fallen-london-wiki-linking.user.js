@@ -6,7 +6,7 @@
 // @include     /^https:\/\/(www\.)?fallenlondon\.com(\/(login)?)?$/
 // @match       https://www.fallenlondon.com/
 // @version     2.7
-// @date        2019-10-11
+// @date        2021-03-16
 // @grant       none
 // @grant       GM_log
 // @grant       GM_setValue
@@ -32,7 +32,7 @@ function GM_debug(msg) {
 /* eslint-enable camelcase */
 
 /**
- * Encodes strings to wikia compatible url naming scheme
+ * Encodes strings to wiki compatible url naming scheme
  * @param {String} s: string to encode
  * @return {String} encoded stirng
  **/
@@ -44,7 +44,7 @@ function encodeLink(s) {
 }
 
 /**
- * Inserts links to relevant wikia page into storylet headers
+ * Inserts links to relevant wiki page into storylet headers
  *
  * @param {HTMLCollection} elements storylet header elements to add links to
  * @return {undefined}
@@ -57,7 +57,7 @@ function insertLink(elements) {
       let name = header.innerText;
       let link = document.createElement("a");
 
-      link.href = `https://fallenlondon.wikia.com/wiki/ ${encodeLink(name)}`;
+      link.href = `https://fallenlondon.wiki/wiki/${encodeLink(name)}`;
       link.style.color = "#282520";
       link.innerText = name;
 
