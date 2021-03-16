@@ -6,7 +6,7 @@
 // @include     /^https:\/\/(www\.)?fallenlondon\.com(\/(login)?)?$/
 // @match       https://www.fallenlondon.com/
 // @version     2.7
-// @date        2019-10-11
+// @date        2021-03-16
 // @grant       none
 // @grant       GM_log
 // @grant       GM_setValue
