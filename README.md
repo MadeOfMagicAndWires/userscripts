@@ -11,8 +11,8 @@ as I prefer offline readers like [MComix](http://sourceforge.net/projects/mcomix
 Contents
 -----
  * [update-metablocks](#update-metablocks)
- * [Mangadex Fullscreen Reader](#mangadex-fullscreen-reader)
- * [Mangadex Toggle Tags](#mangadex-toggle-tags)
+ * ~~[Mangadex Fullscreen Reader](#mangadex-fullscreen-reader)~~ (decaprecated)
+ * ~~[Mangadex Toggle Tags](#mangadex-toggle-tags)~~ (decaprecated)
  * [Youtube Hide Watched](#youtube-hide-watched)
  * [Foolslide Download Links](#foolslide-download-links)
  * [Patreon Creator Activity Only](#patreon-creator-activity-only) (probably out of date)
