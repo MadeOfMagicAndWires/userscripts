@@ -1,9 +1,8 @@
 #!/bin/sh
 
-PROGRAM='update-metablocks';
 VERSION='1.2.3';
 
-LICENCE='
+LICENSE='
 The MIT License (MIT)
 
 Copyright (c) 2014 Joost Bremmer
@@ -43,7 +42,7 @@ HELPMSG="
 ##        -o: Optional output file, default is inputfile.meta.js ##
 ##  --output:                                                    ##
 ##                                                               ##
-## --licence: Prints MIT Licence                                 ##
+## --license: Prints MIT Licence                                 ##
 ##                                                               ##
 ## --version: Print the current version                          ##
 ##                                                               ##
@@ -72,10 +71,10 @@ writeoutput () {
     else
         echo "Writing metablock from \"${INPUTFILE}\" into \"${OUTPUTFILE}\"";
 
-        if grep -E "\@date" "${INPUTFILE}"; then
-            sed -i -r "s/[0-9]{2,4}\\-[0-9]{2,4}\\-[0-9]{2,4}/$DATE/" "${INPUTFILE}";
+        if grep -q -E "\@date" "${INPUTFILE}"; then
+            sed -i -r "s/[0-9]{2,4}\\-[0-9]{2,4}\\-[0-9]{2,4}/$DATE/" "${INPUTFILE}"
         else
-            sed -i -r "/\@version/a // @date           $DATE \ " "${INPUTFILE}";
+            sed -i -r "/\@version/a // @date      $DATE" "${INPUTFILE}";
     fi
 
     grep -e -B 100 "==/UserScript=="  "${INPUTFILE}" > "${OUTPUTFILE}" 2>/dev/null;
@@ -116,8 +115,8 @@ while test $# -gt 0; do
             shift 1;
             ;;
 
-        --licence)
-            echo "$LICENCE";
+        --license)
+            echo "$LICENSE";
             exit 0;
             ;;
 
@@ -130,7 +129,7 @@ while test $# -gt 0; do
                 INPUTFILE="$1"
 
                 if [ "$OUTPUTFILEBOOL" = "false"  ]; then
-                    OUTPUTFILE=$(sed 's/user/meta/g' "$INPUTFILE" );
+                    OUTPUTFILE=$(printf '%s' "$INPUTFILE" | sed 's/user/meta/g');
                 fi
                 writeoutput;
 
